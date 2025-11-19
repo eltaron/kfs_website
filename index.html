@@ -1,0 +1,1135 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>محافظة كفر الشيخ - الموقع الرسمي</title>
+
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+      crossorigin="anonymous"
+    />
+
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+      integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+
+    <!-- Google Fonts (Tajawal) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Tajawal:wght@200;300;400;500;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Swiper CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+    />
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/index.css" />
+  </head>
+  <body>
+    <!-- ======================= Header Start ======================= -->
+    <header>
+      <!-- Top Bar -->
+      <div class="top-bar">
+        <div
+          class="container d-flex justify-content-center justify-content-md-between align-items-center"
+        >
+          <div class="d-none d-md-block date-time" id="date-time-container">
+            <!-- Date and time will be inserted here by JavaScript -->
+          </div>
+          <div class="social-links d-flex align-items-center">
+            <span>تواصل معنا</span>
+            <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+            <a href="#" aria-label="Facebook"
+              ><i class="fab fa-facebook-f"></i
+            ></a>
+            <a href="#" aria-label="Instagram"
+              ><i class="fab fa-instagram"></i
+            ></a>
+            <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+            <a href="#" aria-label="Snapchat"
+              ><i class="fab fa-snapchat"></i
+            ></a>
+            <a href="#" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Main Navigation Bar -->
+      <nav
+        class="navbar navbar-expand-lg navbar-light bg-white shadow-sm main-nav"
+      >
+        <div class="container">
+          <a class="navbar-brand" href="#">
+            <!-- تم استبدال الإيموجي بصورة الشعار -->
+            <img
+              src="images/logo.png"
+              alt="شعار محافظة كفر الشيخ"
+              class="logo-img"
+            />
+          </a>
+
+          <div class="collapse navbar-collapse" id="mainNav">
+            <ul class="navbar-nav m-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#"
+                  >الرئيسية</a
+                >
+              </li>
+              <li class="nav-item dropdown">
+                <a
+                  class="nav-link dropdown-toggle"
+                  href="#"
+                  id="navbarDropdown"
+                  role="button"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  عن المحافظة
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <li><a class="dropdown-item" href="#">تاريخ المحافظة</a></li>
+                  <li><a class="dropdown-item" href="#">رؤية ورسالة</a></li>
+                  <li><hr class="dropdown-divider" /></li>
+                  <li><a class="dropdown-item" href="#">خريطة المحافظة</a></li>
+                </ul>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">الأخبار</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">الخدمات</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">الاستثمار</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">السياحة</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">المشروعات</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">استدامة التدريب والتطوير</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">تواصل معنا</a>
+              </li>
+            </ul>
+          </div>
+          <button
+            class="navbar-toggler"
+            type="button"
+            id="mobileMenuToggler"
+            aria-label="Toggle navigation"
+          >
+            <i class="fas fa-grip"></i>
+          </button>
+        </div>
+      </nav>
+    </header>
+    <!-- ======================= Header End ======================= -->
+    <!-- ======================= Mobile Menu Panel (Hidden by default) ======================= -->
+    <!-- Overlay for the background -->
+    <div class="mobile-menu-overlay" id="mobileMenuOverlay"></div>
+
+    <!-- The actual menu panel -->
+    <div class="mobile-menu-panel" id="mobileMenuPanel">
+      <button class="close-btn" id="closeMobileMenu">&times;</button>
+      <div class="menu-content">
+        <ul>
+          <li><a href="#">تسجيل الدخول</a></li>
+          <li><a href="#">تسجيل جديد</a></li>
+          <li class="separator"></li>
+          <li><a href="#" class="active-mobile-link">الرئيسية</a></li>
+          <li>
+            <a href="#">عن الوزارة <i class="fas fa-chevron-down"></i></a>
+          </li>
+          <li>
+            <a href="#">عن الوزير <i class="fas fa-chevron-down"></i></a>
+          </li>
+          <li>
+            <a href="#">المركز الإعلامي <i class="fas fa-chevron-down"></i></a>
+          </li>
+          <li>
+            <a href="#">خدماتنا <i class="fas fa-chevron-down"></i></a>
+          </li>
+          <li>
+            <a href="#">مواسم ومناسبات</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <!-- ======================= Main Content Start ======================= -->
+    <main class="main-content">
+      <!-- ======================= New Hero Section Start ======================= -->
+      <section class="hero-section">
+        <div class="container">
+          <!-- Search Card -->
+          <div class="hero-search-card">
+            <div class="card-content">
+              <h1>محافظة كفر الشيخ</h1>
+              <h2>نحو مستقبل أفضل <span class="highlight">لمواطنينا</span></h2>
+              <p class="subtitle">اكتشف خدمات ومشروعات المحافظة...</p>
+
+              <form class="hero-search-form" action="/search">
+                <div class="search-wrapper">
+                  <i class="fas fa-search search-icon"></i>
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder="ابحث هنا ..."
+                  />
+                  <button type="submit" class="btn btn-search">ابحث</button>
+                </div>
+              </form>
+
+              <div class="hero-social-icons">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-youtube"></i></a>
+                <a href="#"><i class="fab fa-tiktok"></i></a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Carousel -->
+          <div id="heroCarousel" class="carousel slide" data-bs-ride="carousel">
+            <!-- Custom Indicators -->
+            <div class="carousel-indicators mt-3">
+              <button
+                type="button"
+                data-bs-target="#heroCarousel"
+                data-bs-slide-to="0"
+                class="active"
+                aria-current="true"
+                aria-label="Slide 1"
+              ></button>
+              <button
+                type="button"
+                data-bs-target="#heroCarousel"
+                data-bs-slide-to="1"
+                aria-label="Slide 2"
+              ></button>
+              <button
+                type="button"
+                data-bs-target="#heroCarousel"
+                data-bs-slide-to="2"
+                aria-label="Slide 3"
+              ></button>
+            </div>
+
+            <div class="carousel-inner">
+              <!-- Slide 1 -->
+              <div class="carousel-item active">
+                <img
+                  src="images/image.png"
+                  class="d-block w-100"
+                  alt="صورة خبر"
+                />
+                <div class="carousel-caption">
+                  <span class="news-tag">خبر عاجل</span>
+                  <h3>
+                    محافظ كفر الشيخ وعدد من المحافظين يشهدون فعاليات الاحتفال
+                    بالعيد القومي للمحافظة
+                  </h3>
+                </div>
+              </div>
+              <!-- Slide 2 -->
+              <div class="carousel-item">
+                <img
+                  src="images/image2.png"
+                  class="d-block w-100"
+                  alt="صورة خبر"
+                />
+                <div class="carousel-caption">
+                  <span class="news-tag">تنمية</span>
+                  <h3>تدشين المرحلة الأولى من مشروع تبطين الترع والمصارف</h3>
+                </div>
+              </div>
+              <!-- Slide 3 -->
+              <div class="carousel-item">
+                <img
+                  src="images/image3.png"
+                  class="d-block w-100"
+                  alt="صورة خبر"
+                />
+                <div class="carousel-caption">
+                  <span class="news-tag">خدمات</span>
+                  <h3>إطلاق منظومة التحول الرقمي الجديدة بالوحدات المحلية</h3>
+                </div>
+              </div>
+            </div>
+
+            <!-- Custom Controls -->
+            <button
+              class="carousel-control-prev"
+              type="button"
+              data-bs-target="#heroCarousel"
+              data-bs-slide="prev"
+            >
+              <i class="fas fa-chevron-right"></i>
+            </button>
+            <button
+              class="carousel-control-next"
+              type="button"
+              data-bs-target="#heroCarousel"
+              data-bs-slide="next"
+            >
+              <i class="fas fa-chevron-left"></i>
+            </button>
+          </div>
+        </div>
+      </section>
+      <!-- ======================= New Hero Section End ======================= -->
+      <!-- ======================= Latest Events Section Start ======================= -->
+      <section class="events-section">
+        <div class="container">
+          <!-- Section Header -->
+          <div class="section-header">
+            <div class="title-line"></div>
+            <div class="title-container">
+              <h2>أهم الأحداث</h2>
+              <p>تابع آخر الفعاليات والقرارات الرسمية داخل محافظة كفر الشيخ</p>
+            </div>
+          </div>
+
+          <!-- Events Slider -->
+          <div class="swiper events-slider">
+            <div class="swiper-wrapper">
+              <!-- Slide 1 -->
+              <div class="swiper-slide">
+                <div class="event-card">
+                  <div class="card-img">
+                    <img src="images/image3.png" alt="صورة الحدث" />
+                  </div>
+                  <div class="card-body">
+                    <h5>حرمة التعدي على الجار</h5>
+                    <div class="card-meta">
+                      <i class="fas fa-calendar-alt"></i>
+                      <span>السبت ٢٤ جمادى الأولى ١٤٤٧ھـ - ٢٥-١١-٢٠٢٥م</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Slide 2 -->
+              <div class="swiper-slide">
+                <div class="event-card">
+                  <div class="card-img">
+                    <img src="images/image2.png" alt="صورة الحدث" />
+                  </div>
+                  <div class="card-body">
+                    <h5>خطورة الرشوة</h5>
+                    <div class="card-meta">
+                      <i class="fas fa-calendar-alt"></i>
+                      <span>السبت ١٧ جمادى الأولى ١٤٤٧ھـ - ١٨-١١-٢٠٢٥م</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Slide 3 -->
+              <div class="swiper-slide">
+                <div class="event-card">
+                  <div class="card-img">
+                    <img src="images/image.png" alt="صورة الحدث" />
+                  </div>
+                  <div class="card-body">
+                    <h5>إدمان الأطفال السوشيال ميديا</h5>
+                    <div class="card-meta">
+                      <i class="fas fa-calendar-alt"></i>
+                      <span>الأحد ١١ جمادى الأولى ١٤٤٧ھـ - ١٢-١١-٢٠٢٥م</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Slide 4 (Additional Example) -->
+              <div class="swiper-slide">
+                <div class="event-card">
+                  <div class="card-img">
+                    <img src="images/image4.png" alt="صورة الحدث" />
+                  </div>
+                  <div class="card-body">
+                    <h5>افتتاح مشروع سكني جديد</h5>
+                    <div class="card-meta">
+                      <i class="fas fa-calendar-alt"></i>
+                      <span>الخميس ٠٨ جمادى الأولى ١٤٤٧ھـ - ٠٩-١١-٢٠٢٥م</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Slider Navigation -->
+          <div class="slider-controls">
+            <div class="progress-line"></div>
+            <div class="slider-navigation">
+              <button class="swiper-button-prev">
+                <i class="fas fa-chevron-right"></i>
+              </button>
+              <button class="swiper-button-next">
+                <i class="fas fa-chevron-left"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- ======================= Latest Events Section End ======================= -->
+      <!-- ======================= Statistics Section Start ======================= -->
+      <section class="stats-section">
+        <div class="container">
+          <div class="section-header">
+            <div class="title-line"></div>
+            <div class="title-container">
+              <h2>المحافظة في أرقام</h2>
+              <p>نظرة سريعة على أبرز الإحصائيات والمعلومات الأساسية للمحافظة</p>
+            </div>
+          </div>
+          <div class="row g-4 justify-content-center">
+            <!-- Stat Card 1 -->
+            <div class="col-lg-4 col-md-6">
+              <div class="stat-card">
+                <i class="fas fa-users stat-icon-bg"></i>
+                <h3 class="stat-number" data-target="3783559">0</h3>
+                <p class="stat-description">التعداد السكاني للمحافظة</p>
+              </div>
+            </div>
+
+            <!-- Stat Card 2 -->
+            <div class="col-lg-4 col-md-6">
+              <div class="stat-card">
+                <i class="fas fa-map-marked-alt stat-icon-bg"></i>
+                <h3 class="stat-number" data-target="3683">0</h3>
+                <p class="stat-description">المساحة الكلية للمحافظة (كم²)</p>
+              </div>
+            </div>
+
+            <!-- Stat Card 3 -->
+            <div class="col-lg-4 col-md-6">
+              <div class="stat-card">
+                <i class="fas fa-building stat-icon-bg"></i>
+                <h3 class="stat-number" data-target="14">0</h3>
+                <p class="stat-description">عدد المراكز والمدن بالمحافظة</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- ======================= Statistics Section End ======================= -->
+      <!-- ======================= Latest News Section Start ======================= -->
+      <section class="news-section">
+        <div class="container">
+          <!-- Section Header -->
+          <div class="news-section-header">
+            <div class="title-wrapper">
+              <div class="title-line"></div>
+              <div class="title-container">
+                <h2>آخر الأخبار</h2>
+                <p>تحديثات يومية تسلط الضوء على آخر أخبار وأنشطة المحافظة.</p>
+              </div>
+            </div>
+            <a href="/all-news" class="view-all-link"
+              >عرض كل الأخبار <i class="fas fa-arrow-left"></i
+            ></a>
+          </div>
+
+          <!-- News Grid -->
+          <div class="row g-4">
+            <!-- Large News Column -->
+            <div class="col-lg-6">
+              <a href="#" class="news-card news-card-large">
+                <img src="images/image5.png" alt="صورة الخبر الرئيسي" />
+                <div class="news-caption">
+                  <h3>
+                    كفرالشيخ تستقبل وفدًا سياحيًا أمريكيًا في زيارة لمسار
+                    العائلة المقدسة وكنيسة العذراء مريم بسخا
+                  </h3>
+                </div>
+              </a>
+            </div>
+
+            <!-- Small News Column -->
+            <div class="col-lg-6">
+              <div class="news-grid-small">
+                <!-- Small Card 1 -->
+                <a href="#" class="news-card news-card-small">
+                  <img src="images/image.png" alt="صورة خبر فرعي" />
+                  <div class="news-caption">
+                    <h5>
+                      محافظ كفرالشيخ يشهد فعاليات إطلاق مبادرة «أسرة المستقبل»
+                      لتعزيز التماسك الأسري وبناء الوعي المجتمعي
+                    </h5>
+                  </div>
+                </a>
+                <!-- Small Card 2 -->
+                <a href="#" class="news-card news-card-small">
+                  <img src="images/image2.png" alt="صورة خبر فرعي" />
+                  <div class="news-caption">
+                    <h5>
+                      محافظ كفرالشيخ يزرع الأشجار المثمرة بجوار النصب التذكاري
+                      لشهداء معركة البرلس البحرية تخليدًا لذكراهم
+                    </h5>
+                  </div>
+                </a>
+                <!-- Small Card 3 -->
+                <a href="#" class="news-card news-card-small">
+                  <img src="images/image4.png" alt="صورة خبر فرعي" />
+                  <div class="news-caption">
+                    <h5>
+                      محافظ كفرالشيخ يضع أكاليل الزهور على النصب التذكاري لشهداء
+                      معركة البرلس البحرية
+                    </h5>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- ======================= Latest News Section End ======================= -->
+      <!-- ======================= Services Section Start ======================= -->
+      <section class="services-section">
+        <div class="container">
+          <!-- Section Header -->
+          <div class="services-section-header">
+            <div class="title-wrapper">
+              <div class="title-line"></div>
+              <div class="title-container">
+                <h2>خدمات المحافظة</h2>
+                <p>
+                  مجموعة من الخدمات الموجهة لخدمة مواطني كفر الشيخ ودعم
+                  احتياجاتهم اليومية.
+                </p>
+              </div>
+            </div>
+            <a href="/all-services" class="view-all-link">عرض جميع الخدمات</a>
+          </div>
+
+          <!-- Services Grid -->
+          <div class="row g-4 justify-content-center">
+            <!-- Service Card 1 -->
+            <div class="col-lg-4 col-md-6">
+              <a href="#" class="service-card">
+                <div class="card-icon">
+                  <i class="fas fa-arrow-right"></i>
+                </div>
+                <h3 class="card-title">الحماية<br />الاجتماعية</h3>
+                <p class="card-description">
+                  خدمات متعلقة بالدعم الاجتماعي كالعلاج على نفقة الدولة والتمويل
+                  العقاري وغيرها.
+                </p>
+              </a>
+            </div>
+
+            <!-- Service Card 2 (Highlighted) -->
+            <div class="col-lg-4 col-md-6">
+              <a href="#" class="service-card service-card-highlight">
+                <div class="card-icon">
+                  <i class="fas fa-arrow-right"></i>
+                </div>
+                <h3 class="card-title">الخدمات<br />المدنية</h3>
+                <p class="card-description">
+                  خدمات متعلقة بالأحوال الشخصية والأحوال المدنية والتوثيق
+                  والمرور.
+                </p>
+              </a>
+            </div>
+
+            <!-- Service Card 3 -->
+            <div class="col-lg-4 col-md-6">
+              <a href="#" class="service-card">
+                <div class="card-icon">
+                  <i class="fas fa-arrow-right"></i>
+                </div>
+                <h3 class="card-title">خدمات<br />الملكيات</h3>
+                <p class="card-description">
+                  خدمات متعلقة بالشهر العقاري والسجل العيني الزراعي والحضري.
+                </p>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- ======================= Services Section End ======================= -->
+      <!-- ======================= Investment Section Start (REVISED AND FINAL) ======================= -->
+      <section class="investment-section">
+        <div class="container">
+          <!-- Section Header -->
+          <div class="investment-section-header">
+            <div class="title-wrapper">
+              <div class="title-line"></div>
+              <div class="title-container">
+                <h2>
+                  <span class="highlight">الاستثمار</span> في محافظة كفر الشيخ
+                </h2>
+                <p>
+                  اكتشف أبرز المناطق والفرص الاستثمارية الواعدة في مختلف قطاعات
+                  المحافظة.
+                </p>
+              </div>
+            </div>
+            <a href="/all-investments" class="view-all-link"
+              >عرض الفرص الاستثمارية</a
+            >
+          </div>
+
+          <!-- Investment Cards Grid -->
+          <div class="row g-4 justify-content-center">
+            <!-- Card 1 -->
+            <div class="col-lg-6">
+              <a href="#" class="investment-card">
+                <div class="card-image">
+                  <img src="images/image6.png" alt="صورة المناطق الصناعية" />
+                </div>
+                <div class="card-content">
+                  <h3>المناطق الصناعية</h3>
+                </div>
+              </a>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="col-lg-6">
+              <a href="#" class="investment-card">
+                <div class="card-image">
+                  <img src="images/image7.png" alt="صورة الفرص الاستثمارية" />
+                </div>
+                <div class="card-content">
+                  <h3>الفرص الاستثمارية</h3>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- ======================= Investment Section End ======================= -->
+      <!-- ======================= Tourism Section Start (REVISED) ======================= -->
+      <section class="tourism-section">
+        <div class="container">
+          <!-- Section Header (No changes needed here) -->
+          <div class="tourism-section-header">
+            <div class="title-wrapper">
+              <div class="title-line"></div>
+              <div class="title-container">
+                <h2>
+                  أهم <span class="highlight">المعالم السياحية</span> في
+                  المحافظة
+                </h2>
+                <p>
+                  اكتشف أبرز المواقع التاريخية والطبيعية التي تميز محافظة كفر
+                  الشيخ.
+                </p>
+              </div>
+            </div>
+            <a href="/all-landmarks" class="view-all-link">استكشف المعالم</a>
+          </div>
+
+          <!-- Tourism Slider Container -->
+          <div class="tourism-slider-container">
+            <!-- Main Swiper container -->
+            <div class="swiper tourism-slider">
+              <div class="swiper-wrapper">
+                <!-- Slide 1 -->
+                <div class="swiper-slide">
+                  <a href="#" class="landmark-card">
+                    <img src="images/places/i1.png" alt="متحف كفر الشيخ" />
+                    <div class="landmark-caption"><h3>متحف كفر الشيخ</h3></div>
+                  </a>
+                </div>
+                <!-- Slide 2 -->
+                <div class="swiper-slide">
+                  <a href="#" class="landmark-card">
+                    <img src="images/places/i2.png" alt="جزيرة الشخلوبة" />
+                    <div class="landmark-caption"><h3>قناطر ادفينا</h3></div>
+                  </a>
+                </div>
+                <!-- Slide 3 -->
+                <div class="swiper-slide">
+                  <a href="#" class="landmark-card">
+                    <img
+                      src="images/places/i3.png"
+                      alt="مسجد إبراهيم الدسوقي"
+                    />
+                    <div class="landmark-caption"><h3>جزيرة الشخلوبة</h3></div>
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <!-- External Navigation Buttons -->
+            <div class="showcase-nav">
+              <button class="showcase-nav-button swiper-button-prev-custom">
+                <i class="fas fa-chevron-left"></i>
+              </button>
+              <button class="showcase-nav-button swiper-button-next-custom">
+                <i class="fas fa-chevron-right"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- Tagline -->
+          <div class="tagline w-75 m-auto">
+            <!-- استخدم هذا السطر إذا أردت استخدام صورة للشعار -->
+            <img
+              src="images/kfs.png"
+              alt="كل مكان ليه حكاية مختلفة"
+              class="tagline-image w-100 p-4"
+            />
+          </div>
+        </div>
+      </section>
+      <!-- ======================= Tourism Section End ======================= -->
+      <!-- ======================= Projects Section Start (Enhanced Design) ======================= -->
+      <section class="projects-section">
+        <div class="container">
+          <!-- Section Header -->
+          <div class="projects-section-header">
+            <div class="title-line"></div>
+            <div class="title-container">
+              <h2>المشروعات</h2>
+            </div>
+          </div>
+
+          <!-- Projects Grid -->
+          <div class="row g-4 justify-content-center">
+            <!-- Project Card 1 -->
+            <div class="col-lg-4 col-md-6">
+              <a href="#" class="project-card">
+                <div class="card-media">
+                  <img src="images/projects/i1.png" alt="المشروعات القومية" />
+                  <div class="card-overlay">
+                    <span class="overlay-icon"
+                      ><i class="fas fa-arrow-right"></i
+                    ></span>
+                  </div>
+                </div>
+                <div class="card-title">
+                  <h4>المشروعات القومية</h4>
+                </div>
+              </a>
+            </div>
+
+            <!-- Project Card 2 (Highlighted) -->
+            <div class="col-lg-4 col-md-6">
+              <a href="#" class="project-card project-card-highlight">
+                <div class="card-media">
+                  <!-- ضع شعار حياة كريمة هنا -->
+                  <img
+                    src="images/projects/i2.png"
+                    alt="حياة كريمة"
+                    class="logo"
+                  />
+                  <div class="card-overlay">
+                    <span class="overlay-icon"
+                      ><i class="fas fa-arrow-right"></i
+                    ></span>
+                  </div>
+                </div>
+                <div class="card-title">
+                  <h4>حياة كريمة</h4>
+                </div>
+              </a>
+            </div>
+
+            <!-- Project Card 3 -->
+            <div class="col-lg-4 col-md-6">
+              <a href="#" class="project-card">
+                <div class="card-media">
+                  <img src="images/projects/i3.png" alt="الخطة الاستثمارية" />
+                  <div class="card-overlay">
+                    <span class="overlay-icon"
+                      ><i class="fas fa-arrow-right"></i
+                    ></span>
+                  </div>
+                </div>
+                <div class="card-title">
+                  <h4>الخطة الاستثمارية</h4>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- ======================= Projects Section End ======================= -->
+      <!-- ======================= Achievements Section Start ======================= -->
+      <section class="achievements-section">
+        <div class="container">
+          <div class="row align-items-center g-5">
+            <!-- Content Column -->
+            <div class="col-lg-6 order-lg-2">
+              <div class="achievement-content">
+                <!-- Section Header -->
+                <div class="achievements-section-header">
+                  <div class="title-line"></div>
+                  <div class="title-container">
+                    <h2>
+                      إنجازات الدولة المصرية
+                      <span class="highlight">بالمحافظة</span>
+                    </h2>
+                  </div>
+                </div>
+
+                <p class="description">
+                  قامت الدولة المصرية بعدة إنجازات في محافظة كفرالشيخ حيث تم
+                  تنفيذ العديد من المشروعات القومية التي تسهم في التنمية
+                  الاقتصادية والاجتماعية للمنطقة. من بين هذه الإنجازات:
+                </p>
+
+                <ul class="achievements-list">
+                  <li>مشروع غليون للاستزراع السمكي</li>
+                  <li>محطة كهرباء البرلس</li>
+                  <li>مجمع مصانع الرمال السوداء</li>
+                </ul>
+
+                <a href="/all-achievements" class="btn-explore">
+                  استكشف أهم الإنجازات
+                  <span class="btn-icon"
+                    ><i class="fas fa-arrow-left"></i
+                  ></span>
+                </a>
+              </div>
+            </div>
+
+            <!-- Video/Image Column -->
+            <div class="col-lg-6 order-lg-1">
+              <div class="achievement-video-card">
+                <img src="images/image1.png" alt="صورة إنجازات المحافظة" />
+                <a
+                  href="https://www.youtube.com/watch?v=your-video-id"
+                  target="_blank"
+                  class="play-button"
+                  aria-label="تشغيل الفيديو"
+                >
+                  <i class="fas fa-play"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- ======================= Achievements Section End ======================= -->
+      <!-- ======================= Tabs Section Start ======================= -->
+      <section class="tabs-section">
+        <div class="container">
+          <div class="section-header">
+            <div class="title-line"></div>
+            <div class="title-container">
+              <h2><span class="highlight">تطبيقات</span> قد تهمك</h2>
+            </div>
+          </div>
+          <div class="tabs-content-area">
+            <!-- القائمة الجانبية (Navigation) -->
+            <div class="tabs-navigation">
+              <a href="#azhar" class="tab-item active" data-tab="azhar"
+                >بوابة الأزهر الإلكترونية</a
+              >
+              <a href="#eftaa" class="tab-item" data-tab="eftaa"
+                >دار الإفتاء المصرية</a
+              >
+              <a href="#moshaf" class="tab-item" data-tab="moshaf"
+                >تطبيق مصحف مصر</a
+              >
+              <a href="#shakwa" class="tab-item" data-tab="shakwa"
+                >منظومة الشكاوى الحكومية</a
+              >
+              <a href="#idsc" class="tab-item" data-tab="idsc"
+                >تطبيق IDSC للمعلومات</a
+              >
+            </div>
+
+            <!-- منطقة عرض التفاصيل (Details View) -->
+            <div class="tabs-details-view">
+              <!-- المحتوى 1: بوابة الأزهر (Active by Default) -->
+              <div id="azhar-content" class="tab-detail active-detail">
+                <img
+                  src="images/logos/logo1.png"
+                  alt="Azhar Gateway"
+                  class="detail-image"
+                />
+                <div class="detail-text">
+                  <h3 class="detail-title">بوابة الأزهر الإلكترونية</h3>
+                  <p class="detail-description">
+                    بوابة الأزهر الإلكترونية هي المصدر الرسمي لكل ما يتعلق
+                    بالأزهر الشريف من أخبار، وخدمات تعليمية ودينية، ومواعيد
+                    للندوات والفعاليات الرسمية.
+                  </p>
+                  <a href="URL_لأزهر" target="_blank" class="cta-button"
+                    >زيارة الموقع الإلكتروني</a
+                  >
+                </div>
+              </div>
+
+              <!-- المحتوى 2: دار الإفتاء -->
+              <div id="eftaa-content" class="tab-detail">
+                <img
+                  src="images/logos/logo2.png"
+                  alt="Dar Al-Iftaa"
+                  class="detail-image"
+                />
+                <div class="detail-text">
+                  <h3 class="detail-title">دار الإفتاء المصرية</h3>
+                  <p class="detail-description">
+                    المؤسسة الدينية الرسمية المسؤولة عن إصدار الفتاوى في مصر.
+                    توفر خدمات استشارات دينية والرد على الاستفسارات الفقهية
+                    المختلفة إلكترونياً.
+                  </p>
+                  <a href="URL_للإفتاء" target="_blank" class="cta-button"
+                    >تصفح الفتاوى</a
+                  >
+                </div>
+              </div>
+
+              <!-- المحتوى 3: تطبيق مصحف مصر -->
+              <div id="moshaf-content" class="tab-detail">
+                <img
+                  src="images/logos/logo2.png"
+                  alt="Moshaf Masr"
+                  class="detail-image"
+                />
+                <div class="detail-text">
+                  <h3 class="detail-title">تطبيق مصحف مصر</h3>
+                  <p class="detail-description">
+                    تطبيق رقمي رسمي للقرآن الكريم برواية حفص عن عاصم، تم تطويره
+                    بالتعاون مع جهات مختصة لضمان الدقة وتوفير ميزات قراءة
+                    متقدمة.
+                  </p>
+                  <a href="URL_للمصحف" target="_blank" class="cta-button"
+                    >تحميل التطبيق</a
+                  >
+                </div>
+              </div>
+
+              <!-- المحتوى 4: منظومة الشكاوى الحكومية -->
+              <div id="shakwa-content" class="tab-detail">
+                <img
+                  src="images/logos/logo3.png"
+                  alt="Shakwa System"
+                  class="detail-image"
+                />
+                <div class="detail-text">
+                  <h3 class="detail-title">منظومة الشكاوى الحكومية</h3>
+                  <p class="detail-description">
+                    البوابة الإلكترونية الموحدة لتلقي ورصد الشكاوى والمقترحات
+                    الخاصة بالخدمات الحكومية المختلفة، مما يضمن وصول صوت المواطن
+                    للمسؤولين.
+                  </p>
+                  <a href="URL_للشكاوى" target="_blank" class="cta-button"
+                    >تقديم شكوى</a
+                  >
+                </div>
+              </div>
+
+              <!-- المحتوى 5: تطبيق IDSC -->
+              <div id="idsc-content" class="tab-detail">
+                <img
+                  src="images/logos/logo4.png"
+                  alt="IDSC App"
+                  class="detail-image"
+                />
+                <div class="detail-text">
+                  <h3 class="detail-title">تطبيق IDSC للأمن للمعلومات</h3>
+                  <p class="detail-description">
+                    تطبيق مركز المعلومات ودعم اتخاذ القرار. يوفر معلومات
+                    وإحصائيات محدثة، ويساهم في نشر الوعي الرقمي والبيانات
+                    الحكومية الموثوقة.
+                  </p>
+                  <a href="URL_لـ IDSC" target="_blank" class="cta-button"
+                    >المزيد من التفاصيل</a
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- ======================= City Guide Section Start ======================= -->
+      <section class="city-guide-section">
+        <div class="container-fluid g-0">
+          <div class="row g-0">
+            <!-- Content Column (Right) -->
+            <div class="col-lg-5">
+              <div class="guide-content">
+                <!-- Section Header -->
+                <div class="guide-section-header">
+                  <div class="title-line"></div>
+                  <div class="title-container">
+                    <h2>دليل العاصمة</h2>
+                  </div>
+                </div>
+
+                <!-- Category List -->
+                <div class="guide-categories">
+                  <a href="#" class="category-item active">
+                    <span class="category-icon"
+                      ><i class="fas fa-bed"></i
+                    ></span>
+                    <span class="category-text">4 فنادق</span>
+                  </a>
+                  <a href="#" class="category-item">
+                    <span class="category-icon"
+                      ><i class="far fa-hospital"></i
+                    ></span>
+                    <!-- Using a different hospital icon -->
+                    <span class="category-text">7 مستشفيات حكومية</span>
+                  </a>
+                  <a href="#" class="category-item">
+                    <span class="category-icon"
+                      ><i class="fas fa-hospital-user"></i
+                    ></span>
+                    <!-- And another for private -->
+                    <span class="category-text">5 مستشفيات خاصة</span>
+                  </a>
+                  <a href="#" class="category-item">
+                    <span class="category-icon"
+                      ><i class="fas fa-tree"></i
+                    ></span>
+                    <!-- Icon for parks -->
+                    <span class="category-text">8 نوادي و متنزهات</span>
+                  </a>
+                  <a href="#" class="category-item">
+                    <span class="category-icon"
+                      ><i class="fas fa-bus-alt"></i
+                    ></span>
+                    <span class="category-text">5 مواقف للمواصلات العامة</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <!-- Map Column (Left) -->
+            <div class="col-lg-7">
+              <div class="guide-map">
+                <img src="images/map.png" alt="خريطة العاصمة" />
+                <!-- Map markers will be placed here by CSS/JS or loaded with a map API -->
+                <div class="map-marker" style="top: 40%; left: 55%"></div>
+                <div class="map-marker" style="top: 50%; left: 45%"></div>
+                <div class="map-marker" style="top: 60%; left: 50%"></div>
+                <div class="map-marker" style="top: 70%; left: 58%"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- ======================= City Guide Section End ======================= -->
+    </main>
+    <!-- ======================= Main Content End ======================= -->
+
+    <!-- ======================= Footer Start ======================= -->
+    <footer class="site-footer">
+      <div class="container">
+        <div class="row text-center text-md-end">
+          <!-- About and Social Column -->
+          <div class="col-lg-3 col-md-6 mb-4 mb-lg-0">
+            <div class="footer-logo">
+              <img src="images/footer.png" class="w-100" alt="Logo" />
+            </div>
+            <p class="text-muted">البوابة الإلكترونية لمحافظة كفر الشيخ.</p>
+            <div class="footer-socials">
+              <a href="#" aria-label="Facebook"
+                ><i class="fab fa-facebook-f"></i
+              ></a>
+              <a href="#" aria-label="Instagram"
+                ><i class="fab fa-instagram"></i
+              ></a>
+              <a href="#" aria-label="Twitter"
+                ><i class="fab fa-twitter"></i
+              ></a>
+              <a href="#" aria-label="YouTube"
+                ><i class="fab fa-youtube"></i
+              ></a>
+              <a href="#" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+            </div>
+          </div>
+
+          <!-- Governorate Links -->
+          <div class="col-lg-3 col-md-4 col-6 mb-4 mb-lg-0 text-end">
+            <h5>عن المحافظة</h5>
+            <ul class="list-unstyled footer-links-with-icons">
+              <li>
+                <a href="#"><i class="fas fa-newspaper"></i> الأخبار</a>
+              </li>
+              <li>
+                <a href="#"><i class="fas fa-chart-line"></i> الاستثمار</a>
+              </li>
+              <li>
+                <a href="#"><i class="fas fa-concierge-bell"></i> الخدمات</a>
+              </li>
+              <li>
+                <a href="#"><i class="fas fa-building-flag"></i> المشروعات</a>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Important Sites -->
+          <div class="col-lg-3 col-md-4 col-6 mb-4 mb-md-0 text-end">
+            <h5>مواقع مهمة</h5>
+            <ul class="list-unstyled footer-links-with-icons">
+              <li>
+                <a href="#"><i class="fas fa-desktop"></i> مصر الرقمية</a>
+              </li>
+              <li>
+                <a href="#"><i class="fas fa-briefcase"></i> بوابة الوظائف</a>
+              </li>
+              <li>
+                <a href="#"
+                  ><i class="fas fa-file-signature"></i> بوابة التعاقدات</a
+                >
+              </li>
+              <li>
+                <a href="#"
+                  ><i class="fas fa-hand-holding-heart"></i> التضامن
+                  الاجتماعي</a
+                >
+              </li>
+            </ul>
+          </div>
+
+          <!-- Other Services -->
+          <div class="col-lg-3 col-md-4 d-none d-md-block">
+            <h5>خدمات أخرى</h5>
+            <ul class="list-unstyled footer-links-with-icons">
+              <li>
+                <a href="#"><i class="fas fa-city"></i> خدمات المحليات</a>
+              </li>
+              <li>
+                <a href="#"><i class="fas fa-landmark"></i> الشهر العقاري</a>
+              </li>
+              <li>
+                <a href="#"><i class="fas fa-train-subway"></i> سكك حديد مصر</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <hr />
+        <div class="copyright text-center">
+          محافظة كفر الشيخ - جميع الحقوق محفوظة &copy;
+          <span id="copyright-year"></span>
+        </div>
+      </div>
+    </footer>
+    <!-- ======================= Footer End ======================= -->
+
+    <!-- Bootstrap JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Swiper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script src="js/script.js"></script>
+    <script src="js/index.js"></script>
+  </body>
+</html>

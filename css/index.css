@@ -1,0 +1,1640 @@
+:root {
+  /* ... your existing variables ... */
+  --color-primary-darker: #c59119; /* A darker shade of gold for the button */
+  --color-tag-red: #e53935;
+  --background-body: #f1f3f6; /* Light grey background for the page */
+  --border-radius-large: 24px;
+  --shadow-soft: 0 10px 40px rgba(0, 0, 0, 0.08);
+}
+/* --- New Hero Section Styles --- */
+.main-content {
+  background-color: var(--background-body);
+}
+
+.hero-section {
+  padding: 40px 0;
+}
+
+/* The Search Card on Top */
+.hero-search-card {
+  background: #ffffff;
+  border-radius: var(--border-radius-large);
+  box-shadow: var(--shadow-soft);
+  padding: 2.5rem 2rem;
+  text-align: center;
+  position: relative;
+  z-index: 10;
+  margin: 0 auto -80px;
+  width: 80%;
+}
+
+.hero-search-card h1 {
+  font-weight: 800;
+  color: var(--color-dark-text);
+}
+
+.hero-search-card h2 {
+  font-weight: 700;
+  margin-top: 0.5rem;
+}
+
+.hero-search-card .subtitle {
+  color: var(--color-muted-text);
+  margin-top: 0.5rem;
+  margin-bottom: 2rem;
+}
+
+/* The Custom Search Form */
+.hero-search-form .search-wrapper {
+  position: relative;
+  max-width: 550px;
+  margin: 0 auto;
+}
+.hero-search-form .form-control {
+  height: 55px;
+  border-radius: 50px;
+  background-color: #f7f7f9;
+  border: 1px solid #e8e8e8;
+  padding: 0 60px 0 110px; /* Padding for icon and button */
+}
+.hero-search-form .form-control:focus {
+  background-color: #fff;
+  border-color: var(--color-primary);
+  box-shadow: none;
+}
+.hero-search-form .search-icon {
+  position: absolute;
+  top: 50%;
+  right: 25px; /* RTL */
+  transform: translateY(-50%);
+  color: var(--color-muted-text);
+}
+.hero-search-form .btn-search {
+  position: absolute;
+  top: 50%;
+  left: 7px; /* RTL */
+  transform: translateY(-50%);
+  height: 42px;
+  border-radius: 50px;
+  background-color: var(--color-primary);
+  border: none;
+  color: white;
+  font-weight: bold;
+  padding: 0 30px;
+}
+.hero-search-form .btn-search:hover {
+  background-color: var(--color-primary-darker);
+}
+
+/* Social Icons in Search Card */
+.hero-social-icons {
+  margin-top: 1.5rem;
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+}
+.hero-social-icons a {
+  color: var(--color-muted-text);
+  font-size: 1.1rem;
+  transition: color 0.3s;
+}
+.hero-social-icons a:hover {
+  color: var(--color-primary);
+}
+
+/* Carousel Styling */
+#heroCarousel {
+  border-radius: var(--border-radius-large);
+  overflow: hidden; /* Important for border-radius on images */
+  box-shadow: var(--shadow-soft);
+}
+
+#heroCarousel .carousel-inner {
+  border-radius: var(--border-radius-large);
+}
+#heroCarousel .carousel-item img {
+  height: 500px; /* Fixed height for consistency */
+  object-fit: cover;
+  object-position: center;
+}
+#heroCarousel .carousel-item::before {
+  /* Dark overlay */
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0) 50%,
+    rgba(0, 0, 0, 0.8) 100%
+  );
+  z-index: 1;
+}
+
+/* Carousel Caption */
+#heroCarousel .carousel-caption {
+  right: 5%;
+  left: 5%;
+  bottom: 20px;
+  z-index: 2;
+  text-align: right; /* RTL */
+}
+#heroCarousel .news-tag {
+  display: inline-block;
+  background: var(--color-tag-red);
+  color: #fff;
+  font-size: 0.8rem;
+  font-weight: bold;
+  padding: 5px 12px;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+#heroCarousel .carousel-caption h3 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
+  margin-bottom: 40px;
+}
+
+/* Custom Carousel Controls (Arrows) */
+#heroCarousel .carousel-control-prev,
+#heroCarousel .carousel-control-next {
+  background: rgba(255, 255, 255, 0.2);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  top: 50%;
+  transform: translateY(-50%);
+  transition: background 0.3s;
+}
+#heroCarousel .carousel-control-prev {
+  left: 20px;
+  right: auto;
+} /* RTL */
+#heroCarousel .carousel-control-next {
+  right: 20px;
+  left: auto;
+} /* RTL */
+
+#heroCarousel .carousel-control-prev:hover,
+#heroCarousel .carousel-control-next:hover {
+  background: rgba(255, 255, 255, 0.4);
+}
+#heroCarousel .carousel-control-prev i,
+#heroCarousel .carousel-control-next i {
+  font-size: 1rem;
+}
+
+/* Custom Carousel Indicators */
+#heroCarousel .carousel-indicators {
+  bottom: 25px;
+}
+#heroCarousel .carousel-indicators [data-bs-target] {
+  width: 25px;
+  height: 5px;
+  border-radius: 3px;
+  background-color: rgba(255, 255, 255, 0.5);
+  opacity: 1;
+  border: none;
+  transition: width 0.3s ease;
+}
+#heroCarousel .carousel-indicators .active {
+  width: 45px;
+  background-color: #daa520;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 992px) {
+  .hero-search-card {
+    margin-bottom: -50px;
+  }
+  .hero-search-card h1 {
+    font-size: 2rem;
+  }
+  .hero-search-card h2 {
+    font-size: 1.5rem;
+  }
+  #heroCarousel .carousel-item img {
+    height: 450px;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-section {
+    padding-top: 2rem;
+  }
+  .hero-search-card {
+    /* On small screens, stack them instead of overlapping */
+    margin-bottom: 2rem;
+    padding: 1.5rem;
+    width: 100%;
+  }
+  #heroCarousel .carousel-caption h3 {
+    font-size: 1.2rem;
+  }
+  .carousel-control-prev,
+  .carousel-control-next {
+    display: none;
+  } /* Hide arrows on mobile */
+}
+/* --- Latest Events Section --- */
+.events-section {
+  padding: 50px 0;
+}
+
+/* Event Card Styling */
+.event-card {
+  background: #fff;
+  border-radius: var(--border-radius-large);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+}
+.event-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+.event-card .card-img {
+  height: 200px;
+}
+.event-card .card-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.event-card .card-body {
+  padding: 20px;
+}
+.event-card h5 {
+  font-weight: 700;
+  color: var(--color-dark-text);
+  margin-bottom: 15px;
+}
+.event-card .card-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #999;
+  font-size: 0.85rem;
+}
+.event-card .card-meta i {
+  color: var(--color-primary);
+}
+
+/* Slider Controls */
+.slider-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 30px;
+}
+.slider-navigation {
+  display: flex;
+  gap: 10px;
+}
+.slider-navigation .swiper-button-prev,
+.slider-navigation .swiper-button-next {
+  position: static; /* Override Swiper's default positioning */
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #fff;
+  border: 1px solid #e0e0e0;
+  color: var(--color-dark-text);
+  margin: 0;
+  transition: all 0.3s ease;
+}
+.slider-navigation .swiper-button-prev:hover,
+.slider-navigation .swiper-button-next:hover {
+  background-color: var(--color-primary);
+  color: #fff;
+  border-color: var(--color-primary);
+}
+.slider-navigation .swiper-button-next::after,
+.slider-navigation .swiper-button-prev::after {
+  display: none; /* Hide default Swiper arrows */
+}
+.slider-navigation .swiper-button-next i,
+.slider-navigation .swiper-button-prev i {
+  font-size: 0.8rem;
+}
+
+.progress-line {
+  width: 120px;
+  height: 4px;
+  background-color: var(--color-primary);
+  border-radius: 2px;
+}
+/* --- Statistics Section --- */
+.stats-section {
+  padding: 60px 0;
+  /* This section has the same background as the body */
+  /* background-color: var(--background-body); */
+}
+
+.stat-card {
+  background-color: #ffffff;
+  border: 3px solid var(--color-primary);
+  border-radius: var(--border-radius-large);
+  padding: 2.5rem 1.5rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden; /* Important for the background icon */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.stat-card:hover {
+  transform: translateY(-10px);
+  box-shadow: var(--shadow-soft);
+}
+
+.stat-icon-bg {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 6rem;
+  color: rgba(218, 165, 32, 0.08); /* Gold color but very transparent */
+  z-index: 1;
+}
+
+.stat-number {
+  font-size: 3rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  margin: 0 0 10px 0;
+  position: relative;
+  z-index: 2; /* To appear above the background icon */
+}
+
+.stat-description {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--color-dark-text);
+  margin: 0;
+  line-height: 1.6;
+  position: relative;
+  z-index: 2; /* To appear above the background icon */
+}
+
+@media (max-width: 768px) {
+  .stat-number {
+    font-size: 2.5rem;
+  }
+}
+/* --- Latest News Section --- */
+.news-section {
+  padding: 80px 0;
+  background-color: var(--background-body);
+}
+
+/* Section Header */
+.news-section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2.5rem;
+}
+.news-section-header .title-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+.news-section-header .title-line {
+  width: 6px;
+  height: 60px;
+  background-color: var(--color-primary);
+  border-radius: 3px;
+}
+.news-section-header .title-container h2 {
+  font-weight: 700;
+  font-size: 2.5rem;
+  color: var(--color-primary);
+  margin-bottom: 5px;
+}
+.news-section-header .title-container p {
+  color: var(--color-dark-text);
+  margin: 0;
+}
+.view-all-link {
+  font-weight: bold;
+  color: var(--color-primary);
+  text-decoration: none;
+  transition: color 0.3s;
+}
+.view-all-link i {
+  margin-right: 5px; /* for RTL */
+}
+.view-all-link:hover {
+  color: var(--color-primary-darker);
+}
+
+/* News Card Base Styles */
+.news-card {
+  display: block;
+  position: relative;
+  border-radius: var(--border-radius-large);
+  overflow: hidden;
+  color: #fff;
+  text-decoration: none;
+  transition: transform 0.3s ease;
+}
+.news-card:hover {
+  transform: translateY(-5px);
+}
+.news-card::after {
+  /* Dark overlay */
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0) 40%,
+    rgba(0, 0, 0, 0.85) 100%
+  );
+  z-index: 1;
+  transition: background 0.3s ease;
+}
+.news-card:hover::after {
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0) 20%,
+    rgba(0, 0, 0, 0.95) 100%
+  );
+}
+.news-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+.news-card:hover img {
+  transform: scale(1.05);
+}
+
+.news-caption {
+  position: absolute;
+  bottom: 0;
+  right: 0; /* for RTL */
+  left: 0;
+  z-index: 2;
+  padding: 1.5rem;
+}
+.news-caption h3,
+.news-caption h5 {
+  font-weight: 700;
+  line-height: 1.6;
+}
+
+/* Specific Sizes for Cards */
+.news-card-large {
+  height: 100%;
+  min-height: 540px; /* Approximately 3 small cards height + gaps */
+}
+.news-card-large .news-caption h3 {
+  font-size: 1.6rem;
+}
+.news-card-small {
+  height: 250px;
+}
+.news-card-small .news-caption h5 {
+  font-size: 1.1rem;
+}
+
+/* Small Cards Grid Layout */
+.news-grid-small {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem; /* Space between small cards */
+  height: 100%;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 991.98px) {
+  .news-card-large {
+    min-height: 400px;
+    margin-bottom: 1rem; /* Add space when it stacks */
+  }
+}
+@media (max-width: 768px) {
+  .news-section-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+  .news-card-large {
+    min-height: 300px;
+  }
+  .news-card-small {
+    height: 150px;
+  }
+}
+/* --- Services Section --- */
+.services-section {
+  padding: 80px 0;
+  /* This section has the white background from the body */
+  background-color: #ffffff;
+}
+
+/* Reusing similar header style for consistency */
+.services-section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 3.5rem;
+}
+.services-section-header .title-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+.services-section-header .title-line {
+  width: 6px;
+  height: 60px;
+  background-color: var(--color-primary);
+  border-radius: 3px;
+}
+.services-section-header .title-container h2 {
+  font-weight: 700;
+  font-size: 2.5rem;
+  color: var(--color-dark-text); /* Different from news header */
+  margin-bottom: 5px;
+}
+.services-section-header .title-container p {
+  color: var(--color-muted-text); /* Different from news header */
+  margin: 0;
+}
+.services-section-header .view-all-link {
+  font-weight: bold;
+  color: var(--color-dark-text);
+  text-decoration: underline;
+  text-decoration-color: var(--color-primary);
+  text-underline-offset: 5px; /* space between text and underline */
+  transition: color 0.3s;
+}
+.services-section-header .view-all-link:hover {
+  color: var(--color-primary);
+}
+
+/* Base Service Card Style */
+.service-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 2.5rem 1.5rem;
+  height: 100%;
+  min-height: 350px;
+  border: 3px solid var(--color-primary);
+  border-radius: var(--border-radius-large);
+  background-color: #ffffff;
+  text-decoration: none;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.service-card:hover {
+  transform: translateY(-10px);
+  box-shadow: var(--shadow-soft);
+}
+
+.service-card .card-icon {
+  width: 60px;
+  height: 60px;
+  border: 2px solid var(--color-primary);
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  transition: transform 0.3s ease;
+}
+.service-card .card-icon i {
+  font-size: 1.5rem;
+  color: var(--color-primary);
+  transform: rotate(-135deg); /* To point top-left as in the image */
+}
+
+.service-card .card-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--color-primary);
+  margin-bottom: 1rem;
+}
+
+.service-card .card-description {
+  font-size: 1rem;
+  color: var(--color-dark-text);
+  line-height: 1.7;
+}
+
+/* Highlighted Card Style */
+.service-card-highlight {
+  background-color: var(--color-primary);
+  border-color: var(--color-primary);
+  color: #fff;
+}
+/* Overriding styles for the highlighted card's children */
+.service-card-highlight .card-icon {
+  border-color: #fff;
+}
+.service-card-highlight .card-icon i,
+.service-card-highlight .card-title,
+.service-card-highlight .card-description {
+  color: #fff;
+}
+.service-card-highlight:hover {
+  background-color: var(--color-primary-darker);
+  border-color: var(--color-primary-darker);
+}
+
+/* Responsive */
+@media (max-width: 991.98px) {
+  .service-card {
+    min-height: 320px;
+  }
+}
+
+@media (max-width: 768px) {
+  .services-section-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.5rem;
+  }
+}
+/* --- Investment Section --- */
+/* --- Investment Section (FINAL PIXEL-PERFECT STYLES) --- */
+.investment-section {
+  padding: 80px 0;
+  background-color: var(--background-body);
+}
+
+/* Header styling */
+.investment-section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 3rem;
+}
+.investment-section-header .title-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+.investment-section-header .title-line {
+  width: 6px;
+  height: 60px;
+  background-color: var(--color-primary);
+  border-radius: 3px;
+}
+.investment-section-header .title-container h2 {
+  font-weight: 700;
+  font-size: 2.5rem;
+  color: var(--color-dark-text);
+  margin-bottom: 5px;
+}
+.investment-section-header .title-container h2 .highlight {
+  color: var(--color-primary);
+}
+.investment-section-header .title-container p {
+  color: var(--color-muted-text);
+  margin: 0;
+}
+.investment-section-header .view-all-link {
+  font-weight: bold;
+  color: var(--color-dark-text);
+  text-decoration: underline;
+  text-decoration-color: var(--color-primary);
+  text-underline-offset: 5px;
+  transition: color 0.3s;
+}
+.investment-section-header .view-all-link:hover {
+  color: var(--color-primary);
+}
+
+/* The Investment Card - This is the core fix */
+.investment-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  border-radius: var(--border-radius-large);
+  background-color: #fff; /* A base background just in case */
+  overflow: hidden; /* CRITICAL for rounding corners of children */
+  text-decoration: none;
+  box-shadow: 0 5px 25px rgba(0, 0, 0, 0.07);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+}
+.investment-card:hover {
+  transform: translateY(-10px);
+  box-shadow: var(--shadow-soft);
+}
+
+/* THE KEY FIX: Making the image area a perfect square */
+.investment-card .card-image {
+  position: relative;
+  /* This creates a perfect square that scales responsively */
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+}
+.investment-card .card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+.investment-card:hover .card-image img {
+  transform: scale(1.05);
+}
+
+/* Text content area at the bottom */
+.investment-card .card-content {
+  background: linear-gradient(0, var(--color-primary), transparent);
+  padding: 2.5rem 1rem;
+  text-align: center;
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+.investment-card .card-content h3 {
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: #fff;
+  margin: 0;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 991.98px) {
+  .investment-card .card-content {
+    padding: 2rem 1rem;
+  }
+  .investment-card .card-content h3 {
+    font-size: 1.8rem;
+  }
+}
+@media (max-width: 768px) {
+  .investment-section-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.5rem;
+  }
+}
+/* --- Tourism Section --- */
+.tourism-section {
+  padding: 80px 0;
+  background-color: #fff;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Reusing Header Style */
+.tourism-section-header {
+  flex-wrap: wrap;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 3rem;
+}
+.tourism-section-header .title-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+.tourism-section-header .title-line {
+  width: 6px;
+  height: 60px;
+  background-color: var(--color-primary);
+  border-radius: 3px;
+}
+.tourism-section-header .title-container h2 {
+  font-weight: 700;
+  font-size: 2.5rem;
+  color: var(--color-dark-text);
+  margin-bottom: 5px;
+}
+.tourism-section-header .title-container h2 .highlight {
+  color: var(--color-primary);
+}
+.tourism-section-header .title-container p {
+  color: var(--color-muted-text);
+  margin: 0;
+}
+.tourism-section-header .view-all-link {
+  font-weight: bold;
+  color: var(--color-dark-text);
+  text-decoration: underline;
+  text-decoration-color: var(--color-primary);
+  text-underline-offset: 5px;
+  transition: color 0.3s;
+}
+.tourism-section-header .view-all-link:hover {
+  color: var(--color-primary);
+}
+
+/* Tourism Slider */
+.tourism-slider {
+  padding: 30px 0;
+  /* VERY IMPORTANT: Allows scaled slides to be fully visible */
+  overflow: visible;
+}
+.tourism-slider .swiper-slide {
+  width: 350px; /* Give a fixed width to slides */
+  height: 250px;
+  border-radius: var(--border-radius-large);
+  opacity: 0.7;
+  transform: scale(0.85);
+  transition: transform 0.4s ease, opacity 0.4s ease;
+}
+.tourism-slider .swiper-slide-active {
+  opacity: 1;
+  transform: scale(1);
+  z-index: 2; /* Bring active slide to front */
+}
+
+/* Landmark Card Styles within slide */
+.landmark-card {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: var(--border-radius-large);
+  overflow: hidden;
+  position: relative;
+}
+.landmark-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.landmark-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.3);
+}
+.landmark-caption {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  padding: 1rem;
+  z-index: 1;
+}
+.landmark-caption h3 {
+  color: #fff;
+  font-size: 1.5rem;
+  font-weight: 700;
+  display: flex;
+  justify-content: flex-end; /* for RTL */
+  align-items: center;
+  gap: 10px;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+.landmark-icon {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  border: 2px solid #fff;
+  border-radius: 50%;
+}
+.landmark-icon i {
+  font-size: 1rem;
+  transform: rotate(45deg);
+}
+
+/* Slider Navigation Arrows */
+.tourism-slider .swiper-button-prev,
+.tourism-slider .swiper-button-next {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.9);
+  color: var(--color-dark-text);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+}
+.tourism-slider .swiper-button-prev::after,
+.tourism-slider .swiper-button-next::after {
+  font-size: 1rem;
+  font-weight: bold;
+}
+.tourism-slider .swiper-button-prev {
+  left: 40px;
+}
+.tourism-slider .swiper-button-next {
+  right: 40px;
+}
+
+/* Tagline Styling */
+.tagline {
+  text-align: center;
+  margin-top: 3rem;
+}
+.tagline h2 {
+  font-size: clamp(2.5rem, 8vw, 6rem); /* Responsive font size */
+  font-weight: 800;
+  color: #4a4a4a;
+  line-height: 1.2;
+}
+.tagline-line {
+  width: 150px;
+  height: 5px;
+  background-color: var(--color-primary);
+  border-radius: 3px;
+  margin: 1.5rem auto 0 auto;
+}
+/* --- Tourism Section (REVISED STYLES) --- */
+.tourism-section {
+  padding: 80px 0;
+  background-color: #fff;
+}
+/* The header styling remains the same */
+
+/* --- Tourism Showcase Section (FINAL STYLES) --- */
+.tourism-showcase {
+  padding: 80px 0;
+  background-color: #fff; /* or var(--background-body) if you prefer light grey */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 3rem;
+}
+
+.tourism-slider {
+  width: 650px; /* Width of the main (active) card */
+  height: 400px; /* Height of the main (active) card */
+  position: relative;
+  overflow: visible; /* CRITICAL: To show the previous slide */
+}
+
+.tourism-slider .swiper-slide {
+  width: 100%;
+  height: 100%;
+  border-radius: var(--border-radius-large);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+}
+
+.landmark-card {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: var(--border-radius-large);
+  overflow: hidden;
+  position: relative;
+}
+.landmark-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.landmark-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0.6) 0%,
+    rgba(0, 0, 0, 0) 50%
+  );
+}
+.landmark-caption {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  padding: 1.5rem;
+  z-index: 1;
+  text-align: right;
+}
+.landmark-caption h3 {
+  color: #fff;
+  font-size: 2rem;
+  font-weight: 700;
+  margin: 0;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
+}
+
+/* External Navigation Buttons */
+.showcase-nav {
+  display: flex;
+  gap: 1rem;
+}
+.showcase-nav-button {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: #fff;
+  border: 1px solid #e0e0e0;
+  color: var(--color-dark-text);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.showcase-nav-button:hover {
+  background-color: var(--color-primary);
+  border-color: var(--color-primary);
+  color: #fff;
+}
+.showcase-nav-button i {
+  font-size: 0.9rem;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 992px) {
+  .tourism-showcase {
+    flex-direction: column;
+    gap: 2rem;
+  }
+  .tourism-slider {
+    width: 80vw;
+    height: 55vw;
+    max-width: 650px;
+    max-height: 400px;
+  }
+}
+@media (max-width: 576px) {
+  .tourism-slider {
+    width: 90vw;
+    height: 60vw;
+  }
+  .showcase-nav {
+    order: -1; /* Move buttons to the top on mobile */
+  }
+}
+.showcase-nav {
+  direction: ltr;
+}
+/* --- Projects Section --- */
+.projects-section {
+  padding: 80px 0;
+  background-color: var(--background-body);
+}
+
+/* A simpler header style for this section */
+.projects-section-header {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 2.5rem;
+}
+.projects-section-header .title-line {
+  width: 6px;
+  height: 40px;
+  background-color: var(--color-primary);
+  border-radius: 3px;
+}
+.projects-section-header h2 {
+  font-weight: 700;
+  font-size: 2.5rem;
+  color: var(--color-primary);
+}
+
+/* Base Project Card Style */
+.project-card {
+  display: block;
+  text-decoration: none;
+  background: #fff;
+  border-radius: var(--border-radius-large);
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.06);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  opacity: 0; /* Hidden for entrance animation */
+  transform: translateY(20px);
+}
+.project-card.is-visible {
+  /* Class added by JS */
+  opacity: 1;
+  transform: translateY(0);
+}
+.project-card:hover {
+  transform: translateY(-10px);
+  box-shadow: var(--shadow-soft);
+}
+.card-media {
+  height: 250px;
+  position: relative;
+  border-radius: var(--border-radius-large) var(--border-radius-large) 0 0;
+  overflow: hidden;
+  background-color: #f8f8f8;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.card-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* For photos */
+  transition: transform 0.4s ease;
+}
+.card-media img.logo {
+  object-fit: contain; /* For logos */
+  width: 70%;
+  height: 70%;
+}
+.project-card:hover .card-media img {
+  transform: scale(1.08);
+}
+.card-title {
+  padding: 1.25rem;
+  text-align: center;
+  transition: color 0.3s ease;
+}
+.card-title h4 {
+  margin: 0;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--color-dark-text);
+}
+.project-card:hover .card-title h4 {
+  color: var(--color-primary);
+}
+
+/* Hover Overlay */
+.card-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(44, 44, 44, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+.project-card:hover .card-overlay {
+  opacity: 1;
+}
+.overlay-icon {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.9);
+  color: var(--color-primary);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transform: scale(0.8);
+  transition: transform 0.3s ease;
+}
+.project-card:hover .overlay-icon {
+  transform: scale(1);
+}
+
+/* Highlighted Middle Card */
+.project-card-highlight {
+  /* Make it slightly larger and more prominent by default */
+  transform: translateY(-15px);
+  z-index: 2; /* Ensure it's above its siblings */
+}
+.project-card-highlight:hover {
+  /* Reduce hover lift since it's already raised */
+  transform: translateY(-20px);
+}
+/* --- Achievements Section --- */
+.achievements-section {
+  padding: 80px 0;
+  background-color: var(--background-body);
+}
+
+/* Header Style */
+.achievements-section-header {
+  display: flex;
+  justify-content: flex-end; /* RTL */
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 1.5rem;
+}
+.achievements-section-header .title-line {
+  width: 6px;
+  height: 50px;
+  background-color: var(--color-primary);
+  border-radius: 3px;
+}
+.achievements-section-header h2 {
+  font-weight: 700;
+  font-size: 2.1rem;
+  color: var(--color-dark-text);
+}
+.achievements-section-header .highlight {
+  color: var(--color-primary);
+}
+
+/* Content Side */
+.achievement-content .description {
+  font-size: 1rem;
+  line-height: 1.8;
+  color: var(--color-muted-text);
+  margin-bottom: 2rem;
+}
+
+.achievements-list {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 2.5rem;
+}
+.achievements-list li {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--color-dark-text);
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+}
+.achievements-list li::before {
+  content: "\f00c"; /* Font Awesome check icon */
+  font-family: "Font Awesome 6 Free";
+  font-weight: 900;
+  color: var(--color-dark-text);
+  margin-left: 10px; /* For RTL */
+  font-size: 1.2rem;
+}
+
+/* Explore Button */
+.btn-explore {
+  display: inline-flex;
+  align-items: center;
+  background-color: var(--color-primary);
+  color: #fff;
+  padding: 12px 20px 12px 30px;
+  border-radius: 50px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+.btn-explore:hover {
+  background-color: var(--color-primary-darker);
+  color: #fff;
+}
+.btn-explore .btn-icon {
+  width: 32px;
+  height: 32px;
+  border: 1px solid #fff;
+  border-radius: 50%;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 15px; /* for RTL */
+}
+
+/* Video/Image Side */
+.achievement-video-card {
+  position: relative;
+  border: 4px solid var(--color-primary);
+  border-radius: var(--border-radius-large);
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+.achievement-video-card:hover {
+  transform: scale(1.02);
+}
+.achievement-video-card img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 5; /* Makes the card taller than it is wide */
+  object-fit: cover;
+}
+.play-button {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: var(--color-primary);
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.8rem;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+.play-button:hover {
+  transform: translate(-50%, -50%) scale(1.1);
+  background-color: var(--color-primary-darker);
+}
+
+/* Responsive */
+@media (max-width: 991.98px) {
+  /* Stack order is already correct thanks to order classes */
+  .achievement-video-card {
+    aspect-ratio: 16/9; /* Use a more standard video ratio on mobile */
+  }
+}
+/* ----------------
+   1. تنسيق القسم الرئيسي والشبكة
+   ---------------- */
+.tabs-section {
+  padding: 60px 0;
+  text-align: right;
+}
+
+.section-header {
+  margin-bottom: 30px;
+  text-align: center; /* توسيط العنوان */
+}
+
+.title {
+  font-size: 36px;
+  font-weight: 700;
+  color: #333;
+}
+/* تنسيق لون التمييز */
+.title span {
+  color: #daa520; /* لون أصفر/ذهبي لتمييز العنوان */
+}
+
+.tabs-content-area {
+  display: flex;
+  max-width: 1200px;
+  margin: 0 auto;
+  border-radius: 15px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05); /* ظل خفيف لتمييز المنطقة */
+  overflow: hidden; /* لمنع تجاوز العناصر للحدود */
+}
+
+/* ----------------
+   2. قائمة التنقل (العمود الأيمن)
+   ---------------- */
+.tabs-navigation {
+  flex: 0 0 350px; /* تحديد عرض ثابت لقائمة التنقل */
+  background-color: #f7f7f7; /* خلفية فاتحة للقائمة غير النشطة */
+  padding: 10px 0;
+}
+
+.tab-item {
+  display: block;
+  padding: 18px 25px;
+  font-size: 17px;
+  color: #555;
+  text-decoration: none;
+  border-bottom: 1px solid #eee;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+/* تمييز العنصر النشط */
+.tab-item.active {
+  background-color: #ffffff; /* خلفية بيضاء للعنصر النشط */
+  color: #333;
+  font-weight: 700;
+}
+
+/* شريط التمييز الجانبي للعنصر النشط */
+.tab-item.active::before {
+  content: "";
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 5px;
+  background-color: #daa520; /* شريط ملون للتمييز */
+  border-radius: 0 5px 5px 0;
+}
+
+/* ----------------
+   3. منطقة عرض التفاصيل (العمود الأيسر)
+   ---------------- */
+.tabs-details-view {
+  flex-grow: 1;
+  background-color: #ffffff;
+  padding: 40px;
+}
+
+/* تنسيق المحتوى الداخلي */
+.tab-detail {
+  display: flex; /* لترتيب الصورة والنص جنبًا إلى جنب */
+  gap: 30px;
+  align-items: center; /* توسيط عمودي */
+}
+
+.detail-image {
+  width: 180px;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.detail-text {
+  flex-grow: 1;
+}
+
+.detail-title {
+  font-size: 28px;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.detail-description {
+  font-size: 16px;
+  color: #666;
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+.cta-button {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #daa520;
+  color: #fff;
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+}
+
+.cta-button:hover {
+  background-color: #e09800;
+}
+
+/* ----------------
+   4. الاستجابة (Responsive Design) 
+   ---------------- */
+@media (max-width: 900px) {
+  .tabs-content-area {
+    flex-direction: column;
+  }
+
+  .tabs-navigation {
+    flex: auto;
+    display: flex; /* عرض القائمة أفقياً على الشاشات الصغيرة */
+    overflow-x: auto;
+    border-bottom: 5px solid #daa520;
+    box-shadow: none;
+  }
+
+  .tab-item {
+    flex-shrink: 0;
+    border-bottom: none;
+    border-left: 1px solid #eee;
+  }
+  .tab-item.active::before {
+    height: 5px;
+    width: 100%;
+    top: auto;
+    bottom: -5px; /* وضع الشريط في الأسفل */
+    right: 0;
+  }
+
+  .tab-detail {
+    flex-direction: column;
+    text-align: center;
+  }
+  .detail-image {
+    margin-bottom: 20px;
+  }
+}
+
+/* هذا الجزء يجب إضافته أو تعديله في ملف CSS الخاص بك */
+.tab-detail {
+  display: none; /* إخفاء جميع محتويات التبويبات افتراضيًا */
+  opacity: 0;
+  transition: opacity 0.4s ease-in-out;
+}
+
+.tab-detail.active-detail {
+  display: flex; /* إظهار المحتوى النشط */
+  opacity: 1;
+}
+
+/* لتجنب مشاكل العرض عند الانتقال (خاصة في الوضع العمودي) */
+@media (max-width: 900px) {
+  .tab-detail.active-detail {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+  }
+}
+/* --- City Guide Section --- */
+.city-guide-section {
+  background-color: #2c2c2c; /* Dark background */
+  color: #fff;
+  overflow: hidden; /* Prevent horizontal scroll */
+}
+
+/* Content Side (Right) */
+.guide-content {
+  padding: 4rem 3rem;
+}
+.guide-section-header {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 2.5rem;
+}
+.guide-section-header .title-line {
+  width: 6px;
+  height: 50px;
+  background-color: var(--color-primary);
+  border-radius: 3px;
+}
+.guide-section-header h2 {
+  font-weight: 700;
+  font-size: 2.5rem;
+  color: #fff;
+}
+
+/* Category List */
+/* --- City Guide Categories (FINAL REFINED STYLES) --- */
+.guide-categories {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.category-item {
+  display: flex;
+  flex-direction: row-reverse; /* Put icon on the left for RTL */
+  justify-content: space-between;
+  align-items: center;
+  text-decoration: none;
+  padding: 0.8rem 1rem;
+  border-radius: 50px; /* Fully rounded capsule shape */
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background-color: transparent;
+  color: #fff;
+  transition: all 0.3s ease;
+}
+.category-item:hover {
+  border-color: var(--color-primary);
+  background-color: rgba(218, 165, 32, 0.1); /* Subtle gold glow on hover */
+}
+/* The active state is what matters most */
+.category-item.active {
+  background-color: var(--color-primary);
+  border-color: var(--color-primary);
+  color: #fff; /* White text on gold background */
+  box-shadow: 0 5px 15px rgba(218, 165, 32, 0.2);
+}
+
+.category-icon {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.1rem;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  color: #fff;
+  transition: all 0.3s ease;
+}
+/* Icon style when its parent is active */
+.category-item.active .category-icon {
+  background-color: #fff;
+  color: var(--color-primary); /* Gold icon on white background */
+  border-color: #fff;
+}
+.category-item:hover .category-icon {
+  border-color: var(--color-primary);
+}
+
+.category-text {
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+/* Map Side (Left) */
+.guide-map {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 400px;
+}
+.guide-map img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+/* This is an example marker, you can add more */
+.map-marker {
+  position: absolute;
+  width: 25px;
+  height: 25px;
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23DAA520"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>');
+  background-size: contain;
+  background-repeat: no-repeat;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  box-shadow: 0 0 0 4px rgba(44, 44, 44, 0.5);
+}
+
+/* Responsive */
+@media (max-width: 991.98px) {
+  .guide-map {
+    /* On tablet and below, make the map less tall to not take up too much vertical space */
+    min-height: 400px;
+    height: auto;
+  }
+}
