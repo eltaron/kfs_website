@@ -1,0 +1,521 @@
+/* ==============================================
+   === Estidama Page - Creative Design Styles ===
+   ============================================== */
+
+/* --- 1. Hero Header --- */
+.estidama-hero-new {
+    padding: 6rem 0;
+    position: relative;
+    background-size: cover;
+    background-position: center;
+    color: #fff;
+    text-align: center;
+}
+.estidama-hero-new::before {
+    /* Dark overlay for text readability */
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(rgba(10, 20, 40, 0.8), rgba(10, 20, 40, 0.8));
+}
+.estidama-hero-new .hero-content {
+    position: relative;
+    z-index: 2;
+}
+.hero-logo {
+    height: 100px;
+    margin-bottom: 1.5rem;
+}
+
+/* --- 2. Reusable Section Title --- */
+.section-title,
+.section-title-alt {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--color-dark-text);
+    margin-bottom: 1rem;
+    position: relative;
+    padding-bottom: 1rem;
+}
+.section-title::after,
+.section-title-alt::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 80px;
+    height: 4px;
+    background-color: var(--color-primary);
+    border-radius: 2px;
+}
+.section-title.text-center::after {
+    right: 50%;
+    transform: translateX(50%);
+}
+.section-title-alt {
+    /* Version without bottom line, color primary */
+    color: var(--color-primary);
+    border: none;
+    padding: 0;
+}
+.section-title-alt::after {
+    display: none;
+}
+.page-header {
+    padding: 5rem 0;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    color: #fff;
+    text-align: center;
+}
+.page-header::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+}
+.page-header .container {
+    position: relative;
+    z-index: 2;
+}
+.page-header h1 {
+    font-size: 3rem;
+    font-weight: 700;
+}
+.page-header p {
+    font-size: 1.2rem;
+    opacity: 0.9;
+}
+.page-header .page-subtitle {
+    display: block;
+    font-size: 1rem;
+    font-weight: bold;
+    color: var(--color-primary, #daa520);
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+.page-header.with-thumbnail h1 {
+    font-size: 3.5rem;
+    font-weight: 700;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+}
+/* --- 3. About, Vision, Mission, Goals Sections --- */
+.about-estidama-section {
+    padding: 0 0 4rem 0;
+}
+.video-wrapper {
+    border-radius: 16px;
+    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.15);
+    overflow: hidden;
+    position: relative;
+}
+
+.vision-mission-section {
+    padding-bottom: 4rem;
+}
+.info-card {
+    background: #fff;
+    text-align: center;
+    padding: 2.5rem;
+    border-radius: 16px;
+    box-shadow: var(--shadow-soft, 0 8px 30px rgba(0, 0, 0, 0.08));
+    height: 100%;
+    border-top: 4px solid var(--color-primary);
+    transition:
+        transform 0.3s,
+        box-shadow 0.3s;
+}
+.info-card:hover {
+    transform: translateY(-10px);
+}
+.info-card-icon {
+    max-height: 80px;
+    margin-bottom: 1.5rem;
+}
+.info-card h3 {
+    font-weight: 700;
+    color: var(--color-dark-text);
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+.info-card .goals-list ul {
+    text-align: right;
+    list-style: none;
+    padding: 0;
+}
+
+/* --- 4. Available Programs Section --- */
+#programs {
+    padding: 4rem 0;
+    /* background-color: #f8f9fa; */
+}
+.program-card {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.07);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    transition: all 0.3s;
+}
+.program-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.1);
+}
+.program-card .card-image {
+    height: 200px;
+    overflow: hidden;
+}
+.program-card .card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.program-card .card-content {
+    padding: 1.5rem;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+.program-card .card-center {
+    color: var(--color-muted-text);
+    font-size: 0.85rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+.program-card .card-title {
+    font-size: 1.3rem;
+    margin-bottom: 0.75rem;
+    font-weight: 700;
+    line-height: 1.4;
+    color: #daa520;
+}
+.program-card .card-excerpt {
+    color: #555;
+    font-size: 0.95rem;
+}
+
+/* --- 5. Statistics Hex Section (Re-styled) --- */
+.stats-section-hex {
+    padding: 5rem 0;
+    background: var(--color-dark, #2c2c2c);
+    color: #fff;
+}
+.stat-hex-card {
+    text-align: center;
+    padding: 2rem;
+    position: relative;
+}
+.stat-number {
+    font-size: 3.5rem;
+    font-weight: 800;
+    color: var(--color-primary);
+    display: block;
+    line-height: 1;
+}
+.stat-label {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-top: 0.5rem;
+    color: #eee;
+}
+
+/* --- 6. Events Slider Section --- */
+#events {
+    padding: 4rem 0;
+    background-color: #fff;
+}
+.estidama-events-slider {
+    padding-bottom: 3rem; /* Space for pagination */
+}
+.estidama-event-card {
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+    height: 300px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+}
+.estidama-event-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.event-caption {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    background: linear-gradient(
+        0deg,
+        rgba(0, 0, 0, 0.7) 0%,
+        rgba(0, 0, 0, 0) 100%
+    );
+    color: #fff;
+    padding: 1.5rem 1rem 1rem;
+    font-weight: 600;
+    text-align: right;
+}
+/* --- Partners Section (NEW GRID DESIGN) --- */
+.partners-section {
+    padding: 4rem 0;
+    background-color: #f8f9fa; /* Light grey background */
+}
+
+/* Reusing .section-title style is fine */
+
+.partners-grid {
+    display: grid;
+    /* Create 3 columns of equal size on large screens */
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem; /* Space between logos */
+    align-items: center; /* Vertically align logos */
+    margin-top: 3rem;
+}
+
+.partner-item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1.5rem;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    height: 150px; /* Give a fixed height to the container */
+}
+
+.partner-item img {
+    max-width: 100%;
+    max-height: 90px; /* Control the maximum height of the logo */
+    object-fit: contain; /* Ensure the logo is never cropped */
+    filter: grayscale(100%);
+    opacity: 0.7;
+    transition: all 0.3s ease-in-out;
+}
+
+.partner-item:hover img {
+    filter: grayscale(0%);
+    opacity: 1;
+    transform: scale(1.1);
+}
+
+/* Responsive adjustments */
+@media (max-width: 992px) {
+    .partners-grid {
+        /* Still 3 columns on medium screens */
+        gap: 1.5rem;
+    }
+}
+@media (max-width: 768px) {
+    .partners-grid {
+        /* On small screens, stack them in one column */
+        grid-template-columns: 1fr;
+        max-width: 350px; /* Constrain width on mobile */
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+/* Targeting the main "Register" button inside the card */
+.program-card .btn-primary {
+    background-color: var(--color-primary); /* Use our gold color */
+    border-color: var(--color-primary);
+    font-weight: 700;
+    padding: 0.75rem 1rem;
+    border-radius: 8px; /* Slightly rounded corners */
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+}
+
+.program-card .btn-primary:hover {
+    background-color: var(
+        --color-primary-darker,
+        #c59119
+    ); /* Darker gold on hover */
+    border-color: var(--color-primary-darker, #c59119);
+    transform: translateY(-2px); /* Slight lift effect */
+    box-shadow: 0 4px 15px rgba(218, 165, 32, 0.2);
+}
+
+/* Targeting the "View All" button below the grid */
+#programs .btn-outline-primary {
+    color: var(--color-primary);
+    border-color: var(--color-primary);
+    font-weight: 700;
+    padding: 0.75rem 2rem;
+    border-radius: 50px; /* Capsule shape */
+    border-width: 2px;
+    transition: all 0.3s ease;
+}
+
+#programs .btn-outline-primary:hover {
+    background-color: var(--color-primary);
+    color: #fff;
+    transform: translateY(-2px);
+}
+.program-card {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.07);
+    display: flex;
+    flex-direction: column;
+    transition: all 0.3s;
+}
+.program-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.1);
+}
+.program-card .card-image {
+    height: 200px;
+    overflow: hidden;
+    position: relative; /* Needed for the status badge */
+}
+.program-card .card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.program-card .card-content {
+    padding: 1.5rem;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+.program-card .card-center {
+    color: var(--color-muted-text);
+    font-size: 0.85rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+.program-card .card-title {
+    font-size: 1.3rem;
+    margin-bottom: 0.75rem;
+    font-weight: 700;
+    line-height: 1.4;
+}
+.program-card .card-excerpt {
+    color: #555;
+    font-size: 0.95rem;
+}
+
+/* NEW: Program Status Badge */
+.program-status-badge {
+    position: absolute;
+    top: 15px;
+    left: 15px; /* Or right for RTL, depending on preference */
+    color: #fff;
+    padding: 5px 12px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    border-radius: 50px;
+}
+.btn-outline-primary {
+    color: var(--color-primary);
+    border-color: var(--color-primary);
+}
+
+.btn-outline-primary:hover {
+    color: #fff;
+    background-color: var(--color-primary);
+    border-color: var(--color-primary);
+}
+/* --- سكشن عن المركز --- */
+.estidama-about-wrapper {
+    padding: 60px 0;
+    background-color: #ffffff;
+}
+
+/* تنسيق عنوان القسم المستعار */
+.section-title-alt {
+    color: #e1b12c; /* اللون الذهبي */
+    font-size: 2.5rem;
+    font-weight: 800;
+    margin-bottom: 25px;
+    position: relative;
+    padding-bottom: 10px;
+}
+
+.section-title-alt::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 60px;
+    height: 4px;
+    background-color: #1e272e; /* كحلي الهوية */
+    border-radius: 50px;
+}
+
+/* --- تنسيق القائمة المميزة (Features List) --- */
+.features-list {
+    margin-top: 30px;
+}
+
+.features-list ul {
+    list-style: none;
+    padding: 0;
+}
+
+.features-list ul li {
+    position: relative;
+    padding-right: 35px; /* مساحة للأيقونة من اليمين */
+    margin-bottom: 15px;
+    line-height: 1.8;
+    color: #4b6584;
+    font-weight: 600;
+    font-size: 1.05rem;
+}
+
+/* إضافة أيقونة احترافية لكل عنصر في القائمة */
+.features-list ul li::before {
+    content: "\f058"; /* كود أيقونة التفعيل من FontAwesome */
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    position: absolute;
+    right: 0;
+    top: 5px;
+    color: #e1b12c; /* ذهبي */
+    font-size: 1.2rem;
+}
+
+/* --- تنسيق الفيديو (Video Wrapper) --- */
+.video-wrapper {
+    position: relative;
+    border-radius: 30px; /* زوايا منحنية فخمة */
+    overflow: hidden;
+    padding-top: 56.25%; /* أبعاد 16:9 للحفاظ على النسبة */
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1) !important;
+    background: #000;
+}
+
+.video-wrapper iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100% !important;
+    height: 100% !important;
+    border: none;
+}
+
+/* حركة بسيطة (Animation) لجذب الانتباه */
+.video-wrapper:hover {
+    transform: scale(1.01);
+    transition: transform 0.3s ease;
+}
+
+/* استجابة الموبايل */
+@media (max-width: 991px) {
+    .section-title-alt {
+        font-size: 1.8rem;
+        text-align: center;
+    }
+    .section-title-alt::after {
+        right: 50%;
+        transform: translateX(50%);
+    }
+    .features-list ul li {
+        font-size: 0.95rem;
+        padding-right: 30px;
+    }
+}

@@ -1,0 +1,134 @@
+/* --- Phone Directory Page Styles (directory.index) --- */
+/* Page Header */
+.page-header {
+    padding: 5rem 0;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    color: #fff;
+    text-align: center;
+}
+.page-header::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+}
+.page-header .container {
+    position: relative;
+    z-index: 2;
+}
+.page-header h1 {
+    font-size: 3rem;
+    font-weight: 700;
+}
+.page-header p {
+    font-size: 1.2rem;
+    opacity: 0.9;
+}
+.page-header .page-subtitle {
+    display: block;
+    font-size: 1rem;
+    font-weight: bold;
+    color: var(--color-primary, #daa520);
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+.page-header.with-thumbnail h1 {
+    font-size: 3.5rem;
+    font-weight: 700;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+}
+
+.directory-category-section {
+    margin-bottom: 4rem;
+}
+
+.category-title {
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: var(--color-dark-text);
+    text-align: right;
+    margin-bottom: 2rem;
+    position: relative;
+    padding-right: 1.5rem; /* For RTL */
+}
+
+.category-title::before {
+    content: "";
+    position: absolute;
+    right: 0; /* For RTL */
+    top: 50%;
+    transform: translateY(-50%);
+    width: 6px;
+    height: 70%;
+    background-color: var(--color-primary);
+    border-radius: 3px;
+}
+
+.directory-card {
+    background: #fff;
+    border-radius: 12px;
+    padding: 2rem 1.5rem;
+    text-align: center;
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.07);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.directory-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 35px rgba(218, 165, 32, 0.2);
+}
+
+.directory-card .card-icon {
+    font-size: 2.5rem;
+    color: #fff;
+    background-color: var(--color-primary);
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto 1.5rem auto;
+    box-shadow: 0 4px 15px rgba(218, 165, 32, 0.3);
+}
+
+.directory-card .card-name {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--color-dark-text);
+    margin-bottom: 0.5rem;
+}
+
+.directory-card .card-number {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--color-dark-text);
+    letter-spacing: 1px;
+    margin-bottom: 1.5rem;
+}
+
+.directory-card .call-button {
+    background: transparent;
+    border: 2px solid var(--color-primary);
+    color: var(--color-primary);
+    padding: 0.6rem 1rem;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+.directory-card:hover .call-button {
+    background-color: var(--color-primary);
+    color: #fff;
+}
+.directory-card .call-button i {
+    margin-right: 5px; /* for RTL */
+}

@@ -1,0 +1,135 @@
+/* --- Complaint/Suggestion Form Page Styles --- */
+/* Page Header */
+.page-header {
+    padding: 5rem 0;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    color: #fff;
+    text-align: center;
+}
+.page-header::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+}
+.page-header .container {
+    position: relative;
+    z-index: 2;
+}
+.page-header h1 {
+    font-size: 3rem;
+    font-weight: 700;
+}
+.page-header p {
+    font-size: 1.2rem;
+    opacity: 0.9;
+}
+.page-header .page-subtitle {
+    display: block;
+    font-size: 1rem;
+    font-weight: bold;
+    color: var(--color-primary, #daa520);
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+.page-header.with-thumbnail h1 {
+    font-size: 3.5rem;
+    font-weight: 700;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+}
+
+.form-wrapper-container .form-card {
+    background: #fff;
+    border-radius: var(--border-radius-large, 24px);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+}
+
+.form-card .card-header {
+    background-color: var(--color-dark, #2c2c2c);
+    color: #fff;
+    text-align: center;
+    padding: 2.5rem 2rem;
+}
+
+.card-header .header-icon {
+    font-size: 2rem;
+    color: var(--color-primary);
+    background-color: rgba(255, 255, 255, 0.1);
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto 1rem auto;
+}
+.card-header h3 {
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+.card-header p {
+    color: #ccc;
+    font-size: 0.95rem;
+}
+
+.form-card .card-body {
+    padding: 2.5rem 3rem;
+}
+
+.form-section-title {
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    padding-right: 1rem; /* for RTL */
+    border-right: 3px solid var(--color-primary);
+}
+
+/* General form styling from previous responses should apply */
+.form-label {
+    font-weight: 600;
+    color: var(--color-dark-text);
+}
+.form-control {
+    border-radius: 8px;
+    padding: 0.75rem 1.25rem;
+    background-color: #f8f9fa;
+    border-color: #e9ecef;
+}
+.form-control:focus {
+    background-color: #fff;
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 0.25rem rgba(218, 165, 32, 0.25);
+}
+/* Style for custom file input */
+.form-control[type="file"] {
+    border-style: dashed;
+}
+.btn-primary {
+    background-color: var(--color-primary) !important;
+    border-color: var(--color-primary) !important;
+    font-weight: bold;
+    padding: 0.8rem;
+    border-radius: 8px;
+    transition: background-color 0.3s;
+}
+.btn-primary:hover {
+    background-color: var(--color-primary-darker) !important;
+    border-color: var(--color-primary-darker) !important;
+}
+
+/* Enhance validation messages */
+.invalid-feedback.d-block {
+    margin-top: 0.25rem;
+    font-size: 0.875em;
+}
+
+/* Success message styling */
+.alert-success {
+    background-color: #d1e7dd; /* Bootstrap success bg color */
+    border-color: #badbcc;
+    color: #0f5132;
+}

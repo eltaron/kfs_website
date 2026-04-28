@@ -1,0 +1,631 @@
+/* --- الألوان الثابتة للهوية --- */
+:root {
+    --tm-navy: #1e272e;
+    --tm-gold: #e1b12c;
+    --tm-teal: #16a085;
+}
+
+.gis-detail-page {
+    background: #fdfdfd;
+    font-family: "Cairo", sans-serif;
+}
+
+/* البانر العلوي */
+.service-banner {
+    background-color: var(--tm-navy);
+    padding: 70px 0;
+    color: #fff;
+    border-bottom: 5px solid var(--tm-gold);
+}
+.service-main-title {
+    font-weight: 900;
+    font-size: 2.2rem;
+}
+.price-badge {
+    color: var(--tm-gold);
+    border: 1px dashed var(--tm-gold);
+    padding: 5px 15px;
+    border-radius: 5px;
+    margin-right: 10px;
+}
+
+/* الـ Wizard (خطوات التقنين) */
+.timeline-wizard {
+    display: flex;
+    justify-content: space-around;
+    position: relative;
+}
+
+.timeline-wizard .step {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+}
+
+.timeline-wizard .step.active span {
+    background: var(--tm-teal);
+    border-color: var(--tm-teal);
+    color: #fff;
+    box-shadow: 0 0 15px rgba(22, 160, 133, 0.3);
+}
+.timeline-wizard .step p {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #7f8c8d;
+    margin: 0;
+}
+
+/* الأبنيكس والتبويبات */
+.nav-tabs .nav-link {
+    background: #f1f2f6;
+    border: none !important;
+    border-radius: 50px !important;
+    padding: 12px 30px;
+    color: var(--tm-navy);
+    font-weight: 700;
+    font-size: 0.95rem;
+}
+.nav-tabs .nav-link.active {
+    background: var(--tm-gold) !important;
+    color: #1e272e !important;
+}
+
+/* البرايفاسي والاقرار */
+.start-form-box {
+    background: rgba(225, 177, 44, 0.04);
+    border: 2px dashed rgba(225, 177, 44, 0.3);
+}
+.btn-primary-gis {
+    background: var(--tm-navy);
+    color: #fff;
+    border: none;
+    transition: 0.4s;
+}
+.btn-primary-gis:hover {
+    background: var(--tm-gold);
+    color: #1e272e;
+    transform: translateY(-3px);
+}
+
+/* الـ Widgets */
+.sidebar-sticky {
+    position: sticky;
+    top: 120px;
+}
+.status-verify-widget {
+    background: var(--tm-navy);
+    border-radius: 20px;
+    color: #fff;
+}
+.status-verify-widget h5 {
+    color: var(--tm-gold);
+    font-weight: 800;
+}
+.btn-navy {
+    background: var(--tm-gold);
+    color: #1e272e;
+    font-weight: 700;
+    border: none;
+    transition: 0.3s;
+}
+.btn-navy:hover {
+    background: #fff;
+}
+
+/* حدود فخمة لسكشن المساعدة */
+.border-left-gold {
+    border-right: 5px solid var(--tm-gold);
+    padding-right: 25px;
+}
+.form-check .form-check-input {
+    margin-left: 0;
+}
+/* تأثير جميل عند الوقوف على مربعات الاختيار */
+.transition-hover:hover {
+    background-color: #f8fbfd !important;
+    border-color: #e1b12c !important;
+}
+
+.form-check-input:checked {
+    background-color: #16a085;
+    border-color: #16a085;
+}
+
+/* تنسيق الكتابة العريضة */
+.fw-black {
+    font-weight: 900;
+}
+.form-check .form-check-input {
+    float: left;
+    margin-left: 0 !important;
+}
+/* تنسيق رؤوس الموديلات بالهوية */
+.bg-navy {
+    background-color: #1e272e !important;
+}
+.bg-gold {
+    background-color: #e1b12c !important;
+}
+.text-navy {
+    color: #1e272e !important;
+}
+
+/* جعل المودال يظهر بشكل منزلق وأنيق */
+.modal.fade .modal-dialog {
+    transform: translateY(30px);
+    transition: transform 0.3s ease-out;
+}
+.modal.show .modal-dialog {
+    transform: translateY(0);
+}
+
+.rich-text-content ul {
+    padding-right: 1.5rem;
+}
+.fw-black {
+    font-weight: 900;
+}
+
+/* --- إعدادات الهوية البصرية للخدمات المكانية --- */
+:root {
+    --gis-navy: #1e272e;
+    --gis-gold: #e1b12c;
+    --gis-bg: #f8fafc;
+    --gis-light-gray: #f1f4f8;
+}
+
+.gis-gateways {
+    background-color: var(--gis-bg);
+    padding-bottom: 100px;
+    font-family: "Cairo", sans-serif;
+}
+
+/* تحسين الهيدر ليكون فخماً */
+.gateway-header {
+    background: linear-gradient(135deg, var(--gis-navy) 0%, #2c3e50 100%);
+    color: #fff;
+    padding: 80px 40px;
+    border-bottom: 6px solid var(--gis-gold);
+    margin-bottom: 42px;
+    box-shadow: 0 15px 40px rgba(30, 39, 46, 0.2);
+}
+
+.gateway-header h1 {
+    font-weight: 900;
+    font-size: 3rem;
+}
+.gateway-header .small {
+    color: var(--gis-gold);
+    font-weight: 700;
+    letter-spacing: 2px;
+}
+
+/* قسم الخطوات (The Wizard Timeline) */
+.timeline-wizard {
+    display: flex;
+    justify-content: space-around;
+    position: relative;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.timeline-wizard::after {
+    content: "";
+    position: absolute;
+    top: 14px;
+    width: 80%;
+    height: 2px;
+    background: #dee2e6;
+    z-index: 1;
+}
+
+.timeline-wizard .step {
+    position: relative;
+    z-index: 5;
+    text-align: center;
+}
+
+.timeline-wizard .step span {
+    width: 30px;
+    height: 30px;
+    background: #fff;
+    color: var(--gis-navy);
+    border: 3px solid var(--gis-light-gray);
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 900;
+    font-size: 1.2rem;
+    transition: 0.3s;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+}
+
+/* تمييز الخطوات عند تفعيلها لاحقاً */
+.timeline-wizard .step:first-child span {
+    border-color: var(--gis-gold);
+    background-color: var(--gis-gold);
+    color: var(--gis-navy);
+}
+
+.timeline-wizard .step p {
+    font-weight: 700;
+    color: var(--gis-navy);
+    font-size: 0.95rem;
+}
+
+/* تنسيق الفيديو */
+
+/* بطاقة الفئة (Category Card) */
+.service-cat-card {
+    background: #fff;
+    border-radius: 30px;
+    border: none;
+    height: 100%;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
+    border-top: 5px solid transparent;
+}
+
+.service-cat-card:hover {
+    transform: translateY(-12px);
+    border-top-color: var(--gis-gold);
+    box-shadow: 0 25px 50px rgba(30, 39, 46, 0.1);
+}
+
+.cat-head {
+    padding: 40px 30px;
+    text-align: center;
+}
+
+.cat-head i {
+    font-size: 3.5rem;
+    color: var(--gis-gold);
+    margin-bottom: 20px;
+}
+.cat-title {
+    font-weight: 800;
+    color: var(--gis-navy);
+    font-size: 1.6rem;
+}
+.cat-head p {
+    line-height: 1.8;
+    color: #7f8c8d;
+    font-size: 1rem;
+}
+
+/* قائمة الروابط الفرعية */
+.sub-services-list {
+    padding: 0 25px 40px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.sub-link {
+    display: flex;
+    align-items: center;
+    padding: 15px 25px;
+    background: var(--gis-light-gray);
+    border-radius: 15px;
+    margin-bottom: 12px;
+    color: var(--gis-navy);
+    font-weight: 800;
+    transition: 0.3s;
+    border: 1px solid transparent;
+    justify-content: space-between;
+    width: 30%;
+    text-align: center;
+}
+.sub-link span {
+    width: 100%;
+}
+.sub-link i {
+    transition: 0.3s;
+    color: var(--gis-gold);
+    display: block;
+}
+
+.sub-link:hover {
+    background: var(--gis-navy);
+    color: #fff;
+    transform: scale(1.02);
+}
+
+.sub-link:hover i {
+    transform: translateX(-5px);
+    color: var(--gis-gold);
+}
+
+.section-divider {
+    font-weight: 900;
+    color: var(--gis-navy);
+    margin: 20px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+}
+
+.section-divider::before,
+.section-divider::after {
+    content: "";
+    flex: 1;
+    height: 2px;
+    background: #eee;
+}
+
+/* أزرار العودة للخريطة أو الرئيسي */
+.btn-gis-action {
+    background: var(--gis-gold);
+    color: var(--gis-navy);
+    padding: 12px 30px;
+    border-radius: 50px;
+    font-weight: 900;
+    text-decoration: none;
+    box-shadow: 0 10px 20px rgba(225, 177, 44, 0.3);
+}
+/* --- تصميم هيدر الخدمة الملكي --- */
+.service-premium-header {
+    background-color: var(--tm-navy, #1e272e);
+    position: relative;
+    padding: 20px 0 20px;
+    color: #fff;
+    overflow: hidden;
+    border-bottom: 6px solid var(--tm-gold, #e1b12c);
+}
+
+/* طبقة زخرفية (أهلة وشعارات شفافة) */
+.header-pattern-overlay {
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(
+        circle at 10% 20%,
+        rgba(225, 177, 44, 0.05) 0%,
+        transparent 80%
+    );
+    opacity: 0.6;
+}
+
+/* تحسين شريط المسار (Breadcrumb) */
+.custom-breadcrumb .breadcrumb-item,
+.custom-breadcrumb .breadcrumb-item a {
+    color: rgba(255, 255, 255, 0.6) !important;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+.custom-breadcrumb .breadcrumb-item a:hover {
+    color: var(--tm-gold) !important;
+}
+.text-gold-soft {
+    color: var(--tm-gold) !important;
+}
+.breadcrumb-item + .breadcrumb-item::before {
+    color: rgba(255, 255, 255, 0.3) !important;
+}
+
+/* عنوان الخدمة */
+.service-title-big {
+    font-size: 3rem;
+    color: #fff;
+    letter-spacing: -1px;
+    margin: 15px 0;
+    text-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.fw-black {
+    font-weight: 900 !important;
+}
+
+/* كارت السعر الفخم (Price Seal) */
+.price-seal-wrapper {
+    display: inline-block;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 20px 35px;
+    border-radius: 20px;
+    border: 1px solid rgba(225, 177, 44, 0.2);
+    backdrop-filter: blur(5px);
+    transition: 0.3s ease;
+}
+
+.price-seal-wrapper:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: var(--tm-gold);
+}
+
+.price-label {
+    display: block;
+    font-size: 0.8rem;
+    color: var(--tm-gold);
+    text-transform: uppercase;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.price-amount-box {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    color: #fff;
+}
+
+.price-amount-box .number {
+    font-size: 2.5rem;
+    font-weight: 900;
+}
+.price-amount-box .currency {
+    font-size: 1rem;
+    opacity: 0.8;
+    font-weight: 700;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 767px) {
+    .service-premium-header {
+        padding: 50px 20px 80px;
+        text-align: center;
+    }
+    .service-title-big {
+        font-size: 2rem;
+    }
+    .price-amount-box .number {
+        font-size: 2rem;
+    }
+}
+/* --- ستايل بيان سداد الرسوم الفخم --- */
+.pricing-premium-statement {
+    background: rgba(255, 255, 255, 0.05); /* تأثير زجاجي هادئ */
+    border-radius: 25px;
+    border: 1px solid rgba(225, 177, 44, 0.15);
+    backdrop-filter: blur(12px);
+    overflow: hidden;
+    position: relative;
+    max-width: 350px;
+    margin-right: auto; /* في حالة RTL للتنسيق في الصفحة */
+}
+
+.price-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 12px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.p-label {
+    color: rgba(255, 255, 255, 0.7);
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+.p-value {
+    color: #fff;
+    font-weight: 700;
+    font-size: 1rem;
+    font-family: "Montserrat", sans-serif;
+}
+
+.price-row.last-row {
+    border-bottom: none;
+}
+
+/* الفوتر الذهبي للرصيد الإجمالي */
+.total-receipt-footer {
+    padding: 20px 25px;
+    background: linear-gradient(135deg, #e1b12c 0%, #f1c40f 100%);
+    box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.text-navy {
+    color: #1e272e !important;
+}
+.fw-black {
+    font-weight: 950 !important;
+}
+
+.final-total-amount {
+    display: flex;
+    align-items: baseline;
+    gap: 5px;
+}
+.final-total-amount .amount-number {
+    font-size: 1.8rem;
+    letter-spacing: -1px;
+}
+.final-total-amount .currency {
+    font-weight: 800;
+    font-size: 0.9rem;
+    opacity: 0.8;
+}
+
+/* لمعان بسيط جانبي */
+.pricing-accent-line {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 6px;
+    background-color: var(--tm-gold);
+    box-shadow: 0 0 10px rgba(225, 177, 44, 0.5);
+}
+
+/* للموبايل لضبط الترتيب */
+@media (max-width: 768px) {
+    .pricing-premium-statement {
+        margin: 0 auto;
+        max-width: 100%;
+    }
+}
+.breadcrumb-item + .breadcrumb-item::before {
+    float: right;
+    padding: 0 0.5rem;
+    color: #6c757d;
+    content: var(--bs-breadcrumb-divider, "/");
+}
+.modal-header .btn-close {
+    margin: -0.5rem auto -0.5rem -0.5rem;
+}
+/* --- تنسيق كرت السداد المتميز --- */
+.checkout-summary-card {
+    max-width: 480px;
+    background: #fff;
+    overflow: hidden;
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+.bg-navy {
+    background-color: #1e272e !important;
+}
+.border-gold {
+    border-color: #e1b12c !important;
+}
+
+/* الرقم الإجمالي */
+.final-price-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+    gap: 10px;
+    color: var(--brand-gold, #e1b12c);
+}
+
+.total-digit {
+    font-size: 3.8rem; /* رقم ضخم وواضح */
+    letter-spacing: -2px;
+    font-family: "Montserrat", sans-serif;
+}
+
+.currency-tag {
+    font-size: 1.2rem;
+    font-weight: 800;
+}
+
+/* البادجات الصغيرة في الأسفل */
+.p-badge {
+    background: #f8f9fb;
+    color: #576574;
+    border: 1px solid #edf2f6;
+    padding: 6px 12px;
+    border-radius: 50px;
+    font-size: 0.75rem;
+    font-weight: 700;
+}
+
+.p-badge i {
+    color: #16a085; /* أخضر مريح */
+}
+
+/* تعديل للوزن 950 */
+.fw-950 {
+    font-weight: 950 !important;
+}
+
+/* للموبايل */
+@media (max-width: 576px) {
+    .total-digit {
+        font-size: 2.5rem;
+    }
+    .checkout-summary-card {
+        margin: 0 15px;
+    }
+}
