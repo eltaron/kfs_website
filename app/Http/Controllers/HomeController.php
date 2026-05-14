@@ -48,11 +48,11 @@ class HomeController extends Controller
             ->where('is_published', true)
             ->whereHas('category', fn($q) => $q->where('slug', '!=', 'events')) //  <--  التعديل هنا
             ->latest('published_at')
-            ->take(3)
+            ->take(2)
             ->get();
         // 6. Services
         $services = Service::whereNull('parent_id')
-            ->orderBy('created_at', 'desc')->take(3)
+            ->take(3)
             ->get();
 
         // 7. Investments

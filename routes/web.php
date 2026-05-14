@@ -32,10 +32,12 @@ use App\Http\Controllers\MapController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\OfficialsController;
 use App\Http\Controllers\GisPortalController;
+use App\Http\Controllers\BookingController;
 
 use Illuminate\Http\Request;
 use App\Models\ServiceSubmission;
 
+Route::post('/bookings', [BookingController::class, 'store'])->name('bookings.store');
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/wait', [HomeController::class, 'wait'])->name('wait');
 Route::get('/interactive-map', [MapController::class, 'index'])->name('governorate.map');
@@ -128,8 +130,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/erp-governorate', [ErpController::class, 'index'])->name('employee.erp.index');
     Route::post('/services/{service}/submit', [ServiceSubmissionController::class, 'store'])
         ->name('services.submit');
-    Route::get('/services/submitted/success', function () {
-        return view('services.success');
+    Route::get('/services/success/{submission}', function (App\Models\ServiceSubmission $submission) {
+        return view('services.success', compact('submission'));
     })->name('services.success');
     Route::get('/receipts/{transaction}/print', [ReceiptController::class, 'print'])->name('receipt.print');
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('citizen.dashboard');
@@ -148,20 +150,21 @@ Route::get('/gis/removal-print/{record}', function (App\Models\RemovalOrder $rec
     return view('gis.print-removal-decision', compact('record'));
 })->name('gis.removal.print')->middleware(['auth']);
 
-Route::post('/efinance/callback', function (Request $request) {
-    $status = $request->input('ResponseCode');
-    $reqNum = $request->input('SenderRequestNumber');
-    $submission = ServiceSubmission::find($reqNum);
-    if ($submission && $status === '000') {
-        $submission->update(['status' => 'paid']);
-        return response('000');
-    }
+// Route::post('/efinance/callback', function (Request $request) {
+//     $status = $request->input('ResponseCode');
+//     $reqNum = $request->input('SenderRequestNumber');
+//     $submission = ServiceSubmission::find($reqNum);
+//     if ($submission && $status === '000') {
+//         $submission->update(['status' => 'paid']);
+//         return response('000');
+//     }
 
-    return response('FAILED');
-})->name('efinance.callback')->withoutMiddleware([
-    \Illuminate\Foundation\Http\Middleware\ValidateCsrfToken::class
-]);
-
+//     return response('FAILED');
+// })->name('efinance.callback')->withoutMiddleware([
+//     \Illuminate\Foundation\Http\Middleware\ValidateCsrfToken::class
+// ]);
+Route::post('/efinance/callback', [ServiceSubmissionController::class, 'paymentConfirmation'])
+    ->name('efinance.callback');
 Route::get('/phpinfo', function () {
     phpinfo();
 });

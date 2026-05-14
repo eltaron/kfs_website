@@ -22,7 +22,7 @@ class GisPortalController extends Controller
      */
     public function index()
     {
-        $categories = GisServiceType::with('subServices')->get();
+        $categories = GisServiceType::with('subServices')->orderBy('created_at')->get();
         return view('gis.index', compact('categories'));
     }
 

@@ -12,7 +12,9 @@ class ServiceSubmission extends Model
     protected $guarded = [];
     protected $casts = [
         'submitted_data' => 'array',
+        'paid_at'      => 'datetime',
     ];
+
     public function transaction()
     {
         return $this->morphOne(Transaction::class, 'transactionable');

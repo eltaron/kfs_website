@@ -39,8 +39,8 @@ class PostResource extends Resource
                                 Forms\Components\TextInput::make('title')
                                     ->label('عنوان المقال')
                                     ->required()
-                                    ->maxLength(255)
                                     ->live(onBlur: true)
+                                    ->columnSpanFull()
                                     ->afterStateUpdated(fn(string $operation, $state, Forms\Set $set) => $operation === 'create' ? $set('slug', \Illuminate\Support\Str::slug($state)) : null),
 
                                 Forms\Components\TextInput::make('slug')
@@ -49,6 +49,7 @@ class PostResource extends Resource
                                     ->maxLength(255)
                                     ->unique(Post::class, 'slug', ignoreRecord: true)
                                     ->disabledOn('create')
+                                    ->columnSpanFull()
                                     ->readOnlyOn('edit'),
 
                                 Forms\Components\RichEditor::make('content')

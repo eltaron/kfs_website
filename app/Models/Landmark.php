@@ -23,4 +23,8 @@ class Landmark extends Model
     {
         return $this->morphMany(Image::class, 'imageable');
     }
+    public function bookings()
+    {   
+        return $this->hasMany(Booking::class);
+    }
 }

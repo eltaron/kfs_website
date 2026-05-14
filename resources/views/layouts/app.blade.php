@@ -11,8 +11,9 @@
     <link rel="alternate" href="{{ url()->current() }}" hreflang="ar" />
 
     {{--  ===== 2. Dynamic SEO Meta Tags ===== --}}
-    <title>محافظة كفر الشيخ - الموقع الرسمي</title>
-    <meta name="description" content="@yield('description', $settings['site_description'] ?? 'البوابة الإلكترونية الرسمية لمحافظة كفر الشيخ، تقدم آخر الأخبار، الخدمات، والمشاريع.')" />
+    <title>@yield('title', $settings['site_name'] ?? 'محافظة كفر الشيخ - الموقع الرسمي')</title>
+    <meta name="description" content="@yield('description', $settings['site_description'] ?? '  الموقع الرسمي لمحافظة كفر الشيخ، تقدم آخر الأخبار، الخدمات، والمشاريع.')" />
+    
     <meta name="keywords" content="محافظة كفر الشيخ, كفر الشيخ, خدمات حكومية, أخبار كفر الشيخ, استثمار" />
     <meta name="author" content="محافظة كفر الشيخ" />
 

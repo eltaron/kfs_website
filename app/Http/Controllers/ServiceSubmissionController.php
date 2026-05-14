@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Service;
 use App\Models\ServiceSubmission;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use App\Services\EFinanceService;
 
 class ServiceSubmissionController extends Controller
@@ -17,17 +18,21 @@ class ServiceSubmissionController extends Controller
                 $rules['form_data.' . $field['name']] = 'required';
             }
         }
-        $validated = $request->validate($rules);
-        $base = (float)$service->base_price;
+        $request->validate($rules);
+
+        $formData        = $request->input('form_data', []);
+        $base            = (float) $service->base_price;
         $extraFromInputs = 0;
-        $formData = $request->input('form_data', []);
+
         if (isset($formData['area_m2'])) {
-            $multiplier = 5; // أو اسحبه من $service->pricing_settings
-            $extraFromInputs += (float)$formData['area_m2'] * $multiplier;
+            $multiplier      = (float) ($service->pricing_settings['area_multiplier'] ?? 5);
+            $extraFromInputs += (float) $formData['area_m2'] * $multiplier;
         }
-        $subTotal = $base + $extraFromInputs;
-        $tax = $service->has_vat ? ($subTotal * 0.14) : 0;
-        $totalAmount = $subTotal + $tax + 5.00 + 10.00; // + الشهداء والـ SMS
+
+        $subTotal    = $base + $extraFromInputs;
+        $tax         = $service->has_vat ? ($subTotal * 0.14) : 0;
+        $totalAmount = $subTotal + $tax + 5.00 + 10.00;
+
         $submission = ServiceSubmission::create([
             'service_id'     => $service->id,
             'user_id'        => auth()->id(),
@@ -35,64 +40,137 @@ class ServiceSubmissionController extends Controller
             'status'         => 'awaiting_payment',
             'total_amount'   => $totalAmount,
         ]);
-        // $params = array(
-        //     "sender_id"         => config('services.efinance.sender_id'),
-        //     "sender_name"       => config('services.efinance.sender_name'),
-        //     "efinance_password" => config('services.efinance.password'),
-        //     "service_code"      => config('services.efinance.service_code'),
-        //     "account_code"      => config('services.efinance.settlement_code'),
-        //     "account_amount"    => number_format($totalAmount, 2, '.', ''), // المبلغ الحقيقي محسوباً
-        //     "payment_gateway_url" => config('services.efinance.url'),
-        //     "confirmation_url"  => route('efinance.callback'),
-        //     "confirmation_redirect_url" => route('services.success'),
-        //     "server_ip"         => $request->ip() === '127.0.0.1' ? '::1' : $request->ip(),
-        //     "certificate_path"  => storage_path('app/efinance/InternetPaymentCrt.cer'),
-        //     "client_order_id"   => (string)$submission->id // معرف الطلب الحقيقي من قاعدة بياناتك
-        // );
-        $params = array(
-            "sender_id"         => "5057",
-            "sender_name"       => 'محافظة كفر الشيخ',
-            "efinance_password" => "1234",
-            "service_code"      => "05057",
-            "account_code"      => "5066",
-            "account_amount"    => number_format($totalAmount, 2, '.', ''), // المبلغ الحقيقي محسوباً
-            "payment_gateway_url" => 'https://test-payment.efinance.com.eg/CardPaymentRequestIntiation/index',
-            "confirmation_url"  => route('efinance.callback'),
-            "confirmation_redirect_url" => route('services.success'),
-            "server_ip"         => $request->ip() === '127.0.0.1' ? '::1' : $request->ip(),
-            "certificate_path"  => storage_path('app/efinance/InternetPaymentCrt.cer'),
-            "client_order_id"   => (string)$submission->id // معرف الطلب الحقيقي من قاعدة بياناتك
-        );
-        $mechanism = array(
-            "type"          => "NotSet",
-            "mechanismType" => "NotSet",
-            "channel"       => "",
-        );
+
+        $params = [
+            'sender_id'                 => config('services.efinance.sender_id'),
+            'sender_name'               => config('services.efinance.sender_name'),
+            'efinance_password'         => config('services.efinance.password'),
+            'service_code'              => config('services.efinance.service_code'),
+            'account_code'              => config('services.efinance.settlement_code'),
+            'account_amount'            => number_format($totalAmount, 2, '.', ''),
+            'payment_gateway_url'       => config('services.efinance.url'),
+            'confirmation_url'          => route('efinance.callback'),
+            'confirmation_redirect_url' => route('services.success', ['submission' => $submission->id]),
+            'server_ip'                 => $this->resolveClientIp($request),
+            'certificate_path'          => storage_path('app/efinance/InternetPaymentCrt.cer'),
+            'client_order_id'           => (string) $submission->id,
+        ];
+
+        $mechanism = [
+            'type'          => 'NotSet',
+            'mechanismType' => 'NotSet',
+            'channel'       => '',
+        ];
+
         try {
             $gatewayParams = $efinance->initiatePaymentRequest($params, $mechanism);
-
             return view('services.efinance_redirect', [
                 'url'    => $params['payment_gateway_url'],
-                'params' => $gatewayParams
+                'params' => $gatewayParams,
             ]);
         } catch (\Exception $e) {
             $submission->update(['status' => 'failed']);
-            return back()->with('error', 'حدث خطأ أثناء معالجة عملية الدفع: ' . $e->getMessage());
+            Log::error('EFinance initiation failed', [
+                'submission_id' => $submission->id,
+                'error'         => $e->getMessage(),
+            ]);
+            return back()->with('error', 'حدث خطأ: ' . $e->getMessage());
         }
     }
-    public function paymentConfirmation(Request $request)
+
+    // ─────────────────────────────────────────────────────────────────────────
+    // SILENT CALL
+    //
+    public function paymentConfirmation(Request $request, EFinanceService $efinance)
     {
-        // هنا يجب فك تشفير الـ RequestObject القادم من e-finance
-        // والتحقق من الـ SenderRequestNumber الذي أرسلناه (submission id)
+        $senderRequestNumber = $request->input('SenderRequestNumber');
+        $requestObject       = $request->input('RequestObject');
 
-        $submissionId = $request->SenderRequestNumber;
-        $submission = ServiceSubmission::find($submissionId);
+        Log::info('EFinance silent call received', [
+            'SenderID'            => $request->input('SenderID'),
+            'SenderRequestNumber' => $senderRequestNumber,
+        ]);
 
-        if ($submission && $request->ResponseCode == '000') {
-            $submission->update(['status' => 'paid']);
-            return response('Success', 200); // إفادة بوابة الدفع بالاستلام صـ 15
+        if (!$senderRequestNumber || !$requestObject) {
+            Log::warning('EFinance: missing required POST fields');
+            return $this->ack();
         }
 
-        return response('Failed', 400);
+        try {
+            $submissionId = $efinance->resolveSubmissionId($senderRequestNumber);
+
+            if (!$submissionId) {
+                Log::error('EFinance: cannot map SenderRequestNumber', compact('senderRequestNumber'));
+                return $this->ack();
+            }
+
+            $submission = ServiceSubmission::find((int) $submissionId);
+
+            if (!$submission) {
+                Log::error('EFinance: submission not found', ['submission_id' => $submissionId]);
+                return $this->ack();
+            }
+
+            if ($submission->status === 'paid') {
+                return $this->ack();
+            }
+
+            $decoded = $efinance->silentCall($requestObject, $senderRequestNumber);
+
+            $paymentRequestNumber = $decoded['PaymentRequestNumber']      ?? null;
+            $authorizationCode    = $decoded['AuthorizationCode']         ?? null;
+            $transactionNumber    = $decoded['TransactionNumber']         ?? null;
+            $totalAmount          = $decoded['PaymentRequestTotalAmount'] ?? null;
+
+            Log::info('EFinance decrypted payload', [
+                'submission_id'        => $submission->id,
+                'PaymentRequestNumber' => $paymentRequestNumber,
+                'AuthorizationCode'    => $authorizationCode,
+                'TransactionNumber'    => $transactionNumber,
+            ]);
+
+            // ✅ AuthorizationCode هو مؤشر النجاح — لو موجود = الدفع تم
+            if (!empty($authorizationCode)) {
+                $submission->update([
+                    'status'                 => 'paid',
+                    'payment_request_number' => $paymentRequestNumber,
+                    'authorization_code'     => $authorizationCode,
+                    'transaction_number'     => $transactionNumber,
+                    'paid_at'                => now(),
+                ]);
+
+                Log::info('EFinance: payment confirmed ✅', [
+                    'submission_id'        => $submission->id,
+                    'PaymentRequestNumber' => $paymentRequestNumber,
+                    'AuthorizationCode'    => $authorizationCode,
+                ]);
+            } else {
+                $submission->update(['status' => 'payment_failed']);
+                Log::warning('EFinance: no AuthorizationCode — payment failed ❌', [
+                    'submission_id' => $submission->id,
+                ]);
+            }
+
+        } catch (\Exception $e) {
+            Log::error('EFinance silent call exception', [
+                'SenderRequestNumber' => $senderRequestNumber,
+                'error'               => $e->getMessage(),
+            ]);
+        }
+
+        return $this->ack();
+    }
+    /**
+     * ACK لـ e-finance — HTTP 200 + Response_Code: 000 header (underscore)
+     */
+    private function ack(): \Illuminate\Http\Response
+    {
+        return response('', 200)->header('Response_Code', '000');
+    }
+
+    private function resolveClientIp(Request $request): string
+    {
+        $ip = $request->ip();
+        return in_array($ip, ['127.0.0.1', '::1'], true) ? '::1' : $ip;
     }
 }

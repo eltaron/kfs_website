@@ -31,20 +31,62 @@ class LandmarkResource extends Resource
                             ->required()
                             ->maxLength(255),
 
+                        // ✅ حقل العنوان الجديد
+                        Forms\Components\Textarea::make('address')
+                            ->label('العنوان التفصيلي')
+                            ->helperText('أدخل العنوان الكامل للمعلم لتسهيل الوصول إليه')
+                            ->placeholder('مثال: شارع الحرية، وسط البلد، القاهرة')
+                            ->rows(2)
+                            ->columnSpanFull(),
+
                         Forms\Components\Select::make('location_id')
                             ->relationship('location', 'name')
                             ->label('الموقع الجغرافي (من دليل العاصمة)')
                             ->searchable()
                             ->preload()
-                            ->createOptionForm([ // Quick-create a new location from this form
+                            ->createOptionForm([
                                 Forms\Components\TextInput::make('name')->label('اسم الموقع الجديد')->required(),
-                                // ... add latitude/longitude fields if needed
                             ]),
+
+                        Forms\Components\TextInput::make('latitude')
+                            ->label('خط العرض (Latitude)')
+                            ->numeric()
+                            ->placeholder('مثال: 31.1143')
+                            ->helperText('يمكنك الحصول عليه من جوجل ماب')
+                            ->afterStateUpdated(function (Forms\Set $set, ?float $state, ?float $longitude) {
+                                // تحديث رابط الخريطة تلقائياً إذا كانت الإحداثيات متوفرة
+                                if ($state && $longitude) {
+                                    $iframe = sprintf(
+                                        '<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3456.789!2d%s!3d%s!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%%3A0x0!2zMzHCsDA2JzUxLjQiTiAzMMKwNTYnMjkuOCJF!5e0!3m2!1sen!2seg!4v1234567890" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>',
+                                        $longitude,
+                                        $state
+                                    );
+                                    $set('iframe', $iframe);
+                                }
+                            }),
+
+                        Forms\Components\TextInput::make('longitude')
+                            ->label('خط الطول (Longitude)')
+                            ->numeric()
+                            ->placeholder('مثال: 30.9416')
+                            ->afterStateUpdated(function (Forms\Set $set, ?float $state, ?float $latitude) {
+                                // تحديث رابط الخريطة تلقائياً إذا كانت الإحداثيات متوفرة
+                                if ($state && $latitude) {
+                                    $iframe = sprintf(
+                                        '<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3456.789!2d%s!3d%s!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%%3A0x0!2zMzHCsDA2JzUxLjQiTiAzMMKwNTYnMjkuOCJF!5e0!3m2!1sen!2seg!4v1234567890" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>',
+                                        $state,
+                                        $latitude
+                                    );
+                                    $set('iframe', $iframe);
+                                }
+                            }),
+
                         Forms\Components\Textarea::make('iframe')
                             ->label('كود تضمين الخريطة أو الجولة الافتراضية (iframe)')
                             ->helperText('إذا كان هناك خريطة مخصصة أو جولة افتراضية، انسخ كود iframe هنا.')
                             ->rows(5)
                             ->columnSpanFull(),
+
                         Forms\Components\FileUpload::make('thumbnail')
                             ->label('الصورة المصغرة الرئيسية')
                             ->image()
@@ -92,19 +134,6 @@ class LandmarkResource extends Resource
                             ->addActionLabel('أضف صورة للمعرض')
                             ->collapsible(),
                     ]),
-                Forms\Components\Section::make('الموقع الجغرافي (على الخريطة)')
-                    ->schema([
-                        Forms\Components\TextInput::make('latitude')
-                            ->label('خط العرض (Latitude)')
-                            ->numeric()
-                            ->placeholder('مثال: 31.1143')
-                            ->helperText('يمكنك الحصول عليه من جوجل ماب'),
-
-                        Forms\Components\TextInput::make('longitude')
-                            ->label('خط الطول (Longitude)')
-                            ->numeric()
-                            ->placeholder('مثال: 30.9416'),
-                    ])->columns(2),
             ]);
     }
 
@@ -119,6 +148,12 @@ class LandmarkResource extends Resource
                     ->label('الاسم')
                     ->searchable()
                     ->sortable(),
+
+                Tables\Columns\TextColumn::make('address')
+                    ->label('العنوان')
+                    ->searchable()
+                    ->limit(50)
+                    ->placeholder('لا يوجد عنوان'),
 
                 Tables\Columns\TextColumn::make('location.name')
                     ->label('الموقع')
@@ -150,6 +185,7 @@ class LandmarkResource extends Resource
             ->reorderable('order')
             ->defaultSort('order', 'asc');
     }
+
     public static function getNavigationBadge(): ?string
     {
         return static::getModel()::count();

@@ -215,8 +215,12 @@ class EFinanceService
     {
         $objSerialized = $this->SerializePaymentInitiationRequest($req);
         //$this->returnOrderNo($req->DecryptedRequestObject->SenderRequestNumber);
-        file_put_contents($_SERVER['DOCUMENT_ROOT'] . '/pgw/orders/' . $req->DecryptedRequestObject->SenderRequestNumber .
-            '.log', $req->DecryptedRequestObject->SenderInvoiceNumber);
+        // Persist SenderRequestNumber → SenderInvoiceNumber mapping for callback resolution
+        @mkdir($this->pgwPath('orders'), 0775, true);
+        file_put_contents(
+            $this->pgwPath('orders/' . $req->DecryptedRequestObject->SenderRequestNumber . '.log'),
+            $req->DecryptedRequestObject->SenderInvoiceNumber
+        );
         $req->EncryptedRequestObject = $this->AESEncrypt($objSerialized, $req->DecryptedRequestObject->SenderRequestNumber);
         $req->setRandomSecret($this->EncryptByCertificate($req->EncryptedRequestObject['randomSecret'], $certificatePath));
         $req->HasedRequestObject = $this->HashSHA2($req->EncryptedRequestObject['encrypted']);
@@ -327,7 +331,8 @@ class EFinanceService
                 'encrypted' => base64_encode($enc),
                 'randomSecret' => base64_encode($string),
             );
-        file_put_contents($_SERVER['DOCUMENT_ROOT'] . '/pgw/logs/' . $orderNo . '.log', json_encode($returned));
+        @mkdir($this->pgwPath('logs'), 0775, true);
+        file_put_contents($this->pgwPath('logs/' . $orderNo . '.log'), json_encode($returned));
         return $returned;
     }
 
@@ -367,23 +372,99 @@ class EFinanceService
             return $num;
     }
 
+    // ─────────────────────────────────────────────────────────────────────────
+    // PATH HELPER
+    // ─────────────────────────────────────────────────────────────────────────
+
     /**
+     * Central method for resolving the /pgw/ base path.
+     *
+     * Uses public_path() (Laravel helper) so the path is correct regardless of
+     * whether we are running in a web context, CLI, or a queue worker — unlike
+     * $_SERVER['DOCUMENT_ROOT'] which is only set in HTTP requests.
+     *
+     * Ensure the directories exist:
+     *   php artisan storage:link            (not needed; these live in public/)
+     *   mkdir -p public/pgw/logs public/pgw/orders && chmod 775 public/pgw/logs public/pgw/orders
+     */
+    private function pgwPath(string $relativePath): string
+    {
+        return public_path('pgw/' . ltrim($relativePath, '/'));
+    }
+
+    // ─────────────────────────────────────────────────────────────────────────
+    // SILENT CALL  (server-to-server callback from e-finance)
+    // ─────────────────────────────────────────────────────────────────────────
+
+    /**
+     * Decrypt and parse the encrypted RequestObject received from e-finance's
+     * silent (server-to-server) callback.
+     *
+     * Flow:
+     *   1. Read the AES key we persisted during initiation
+     *      from /pgw/logs/{senderRequestNumber}.log
+     *   2. AES-decrypt the RequestObject
+     *   3. Parse the XML → return as an associative array
+     *
+     * @param  string $requestObject       URL-decoded encrypted blob from e-finance POST
+     * @param  string $senderRequestNumber The 16-char random value we generated on initiation
+     * @return array  Decrypted payload (ResponseCode, AuthorizerRequestNumber, …)
      * @throws Exception
      */
     public function silentCall($requestObject, $senderRequestNumber)
     {
-        $fileOpened = $_SERVER['DOCUMENT_ROOT'] . '/pgw/logs/' . $senderRequestNumber . '.log';
-        $file = file_get_contents($fileOpened);
-        $key = json_decode($file)->randomSecret;
+        $logFile = $this->pgwPath('logs/' . $senderRequestNumber . '.log');
+
+        if (!file_exists($logFile)) {
+            throw new Exception("AES key log not found for SenderRequestNumber: {$senderRequestNumber}");
+        }
+
+        $file      = file_get_contents($logFile);
+        $key       = json_decode($file)->randomSecret ?? null;
+
+        if (!$key) {
+            throw new Exception("Invalid AES key log for SenderRequestNumber: {$senderRequestNumber}");
+        }
+
         $xmlObject = $this->AESDecrypt($requestObject, $key);
-        $x = array('key' => $key, 'file' => $fileOpened);
-        file_put_contents($_SERVER['DOCUMENT_ROOT'] . '/pgw/check.txt', serialize($x));
+
+        if ($xmlObject === false || $xmlObject === null) {
+            throw new Exception("AES decryption failed for SenderRequestNumber: {$senderRequestNumber}");
+        }
+
+        // The gateway returns UTF-16 XML; convert declaration so SimpleXML can parse it
         $xmlObject = preg_replace('/(<\?xml[^?]+?)utf-16/i', '$1utf-8', $xmlObject);
-        $ob = simplexml_load_string($xmlObject);
-        $encoded = json_encode($ob);
-        $decoded = json_decode($encoded, true);
-        //return serialize($decoded);
+        $ob        = simplexml_load_string($xmlObject);
+
+        if ($ob === false) {
+            throw new Exception("XML parse failed. Raw (first 500 chars): " . substr($xmlObject, 0, 500));
+        }
+
+        $decoded = json_decode(json_encode($ob), true);
+
         return $decoded;
+    }
+
+    /**
+     * Resolve our internal submission ID from a SenderRequestNumber.
+     *
+     * During initiation, EncryptPaymentRequest() writes:
+     *   /pgw/orders/{SenderRequestNumber}.log  →  plain-text SenderInvoiceNumber (= submission->id)
+     *
+     * @param  string $senderRequestNumber
+     * @return string|null  The submission ID, or null if the mapping file is missing
+     */
+    public function resolveSubmissionId(string $senderRequestNumber): ?string
+    {
+        $ordersLog = $this->pgwPath('orders/' . $senderRequestNumber . '.log');
+
+        if (!file_exists($ordersLog)) {
+            return null;
+        }
+
+        $id = trim(file_get_contents($ordersLog));
+
+        return $id !== '' ? $id : null;
     }
 
     /**

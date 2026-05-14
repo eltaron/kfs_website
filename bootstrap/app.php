@@ -15,6 +15,7 @@ return Application::configure(basePath: dirname(__DIR__))
             '/efinance/callback', // استثناء رابط شركة e-finance من فحص التوكن
         ]);
     })
+    
     ->withExceptions(function (Exceptions $exceptions): void {
         //
     })->create();

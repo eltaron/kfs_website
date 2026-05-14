@@ -633,8 +633,8 @@ a:hover {
 
 /* Large Card Specifics */
 .news-card-large {
-    height: 100%;
-    min-height: 540px;
+    height: 415px;
+    min-height: 100%;
 }
 .news-card-large h3 {
     font-size: 1.8rem;

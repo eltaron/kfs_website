@@ -1,47 +1,44 @@
 @extends('layouts.app')
 
 @section('title', $service->title)
+
 @push('css')
     <link rel="stylesheet" href="{{ asset('css/services.css') }}">
     <style>
-        /* تأكد من إخفاء الحقول المشروطة فقط، مع ضمان ظهور الحقول الأساسية */
-        .conditional-field {
-            display: none;
+        .conditional-field { display: none; }
+        .service-form-card { border-top: 5px solid #DAA520; transition: 0.3s; }
+        .form-label { color: #1e272e; font-weight: 700; margin-bottom: 10px; }
+        .pricing-widget { border-radius: 15px; overflow: hidden; background: #fff;padding:0 }
+        .price-breakdown li { display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px dashed #eee; }
+        .total-box { background: #1e272e; color: #fff; border-radius: 12px; }
+        .text-gold { color: #DAA520 !important; }
+        .btn-gold { background-color: #DAA520; border-color: #DAA520; color: #fff; transition: 0.3s; }
+        .btn-gold:hover { background-color: #c59119; color: #fff; transform: translateY(-2px); }
+        .input-group>:not(:first-child):not(.dropdown-menu):not(.valid-tooltip):not(.valid-feedback):not(.invalid-tooltip):not(.invalid-feedback) {
+            border-top-left-radius: 5px;
+            border-bottom-left-radius: 5px;
+            border-top-right-radius: 0;
+            border-bottom-right-radius: 0;
         }
-
-        /* تعديل المسافة بسبب الهيدر الثابت */
-        .main-content {
-            padding-top: 50px;
-        }
-
-        .service-form-card {
-            border-top: 5px solid var(--tm-gold);
-            transition: 0.3s;
-        }
-
-        .form-label {
-            color: #1e272e;
-            font-weight: 700;
-            margin-bottom: 10px;
-        }
+        
     </style>
 @endpush
 
 @section('content')
     <main class="main-content">
-        <header class="page-header" style="background-image: url('{{ asset('images/bg/services.jpg') }}');">
+        <header class="page-header" style="background-image: url('{{ asset('images/bg/services.jpg') }}'); background-size: cover; background-position: center;">
             <div class="container text-center py-5">
-                <span class="badge-gold mb-2">{{ $service->parent ? $service->parent->title : 'دليل الخدمات' }}</span>
-                <h1 class="text-white fw-900">{{ $service->title }}</h1>
+                <span class="badge bg-warning text-dark mb-2">{{ $service->parent ? $service->parent->title : 'دليل الخدمات' }}</span>
+                <h1 class="text-white fw-bold">{!! $service->title !!}</h1>
             </div>
         </header>
 
         <div class="container py-5">
-            <div class="row g-5">
+            <div class="row g-5 text-end" dir="rtl">
                 {{-- قسم الفورم --}}
                 <div class="col-lg-8">
                     @if ($service->description)
-                        <article class="rich-text-content mb-5 bg-white p-4 rounded-3 shadow-sm">
+                        <article class="rich-text-content mb-4 bg-white p-4 rounded-3 shadow-sm">
                             {!! $service->description !!}
                         </article>
                     @endif
@@ -66,97 +63,81 @@
                             </div>
                         </div>
                     @else
-                        <div class="service-form-card bg-white shadow p-5 rounded-4">
+                        <div class="service-form-card bg-white shadow-lg p-5 rounded-4">
                             <div class="text-center mb-5 border-bottom pb-4">
                                 <h3 class="fw-bold">استمارة تقديم الطلب الرقمية</h3>
                                 <p class="text-muted">نظام الربط الإلكتروني المباشر بمركز المتغيرات المكانية</p>
                             </div>
 
                             @auth
-                                @if (is_array($service->form_fields) && count($service->form_fields) > 0)
-                                    <form action="{{ route('services.submit', $service) }}" method="POST"
-                                        enctype="multipart/form-data" id="dynamicServiceForm">
-                                        @csrf
+                                <form action="{{ route('services.submit', $service) }}" method="POST" enctype="multipart/form-data" id="dynamicServiceForm">
+                                    @csrf
 
-                                        @foreach ($service->form_fields as $field)
-                                            <div class="form-group mb-4 @if (isset($field['is_conditional']) && $field['is_conditional']) conditional-field @endif"
-                                                id="group_{{ $field['name'] }}"
-                                                data-depends-on="{{ $field['depends_on'] ?? '' }}"
-                                                data-depends-val="{{ is_array($field['depends_on_value'] ?? '') ? json_encode($field['depends_on_value']) : $field['depends_on_value'] ?? '' }}">
+                                    @foreach ($service->form_fields as $field)
+                                        <div class="form-group mb-4" id="group_{{ $field['name'] }}">
+                                            <label class="form-label">
+                                                {{ $field['label'] }}
+                                                @if ($field['is_required'] ?? false) <span class="text-danger">*</span> @endif
+                                            </label>
 
-                                                <label class="form-label d-block text-end">
-                                                    {{ $field['label'] }}
-                                                    @if ($field['is_required'] ?? false)
-                                                        <span class="text-danger">*</span>
-                                                    @endif
-                                                </label>
-
-                                                @switch($field['type'])
-                                                    @case('select')
-                                                        <select name="{{ $field['name'] }}" class="form-select select-trigger p-3 px-5"
-                                                            @if (!isset($field['is_conditional'])) required @endif>
-                                                            <option value="">-- اختر --</option>
+                                            @switch($field['type'])
+                                                @case('select')
+                                                    <select name="{{ $field['name'] }}" class="form-select p-3 px-5 {{ $field['name'] == 'category' ? 'calc-trigger' : '' }}" required>
+                                                        <option value="">-- اختر --</option>
+                                                        {{-- إذا كان الحقل هو حقل المناطق، نقوم بتوليد الخيارات من جدول الأسعار تلقائياً --}}
+                                                        @if($field['name'] == 'category' && !empty($service->category_pricing))
+                                                            @foreach ($service->category_pricing as $priceItem)
+                                                                <option value="{{ $priceItem['name'] }}">{{ $priceItem['name'] }}</option>
+                                                            @endforeach
+                                                        @else
                                                             @foreach ($field['options'] ?? [] as $opt)
                                                                 <option value="{{ $opt['value'] }}">{{ $opt['label'] }}</option>
                                                             @endforeach
-                                                        </select>
-                                                    @break
+                                                        @endif
+                                                    </select>
+                                                @break
 
-                                                    @case('db_select')
-                                                        <select name="{{ $field['name'] }}" class="form-select p-3">
-                                                            <option value="">-- اختر من السجلات المتاحة --</option>
-                                                            @php
-                                                                $options = [];
-                                                                if ($field['table'] == 'markazs') {
-                                                                    $options = \App\Models\Markaz::all();
-                                                                } elseif ($field['table'] == 'shiakhas') {
-                                                                    $options = \App\Models\Shiakha::all();
-                                                                } elseif ($field['table'] == 'villages') {
-                                                                    $options = \App\Models\Village::all();
-                                                                }
-                                                            @endphp
-                                                            @foreach ($options as $item)
-                                                                <option value="{{ $item->id }}">{{ $item->name }}</option>
-                                                            @endforeach
-                                                        </select>
-                                                    @break
+                                                @case('file')
+                                                    <input type="file" name="{{ $field['name'] }}" class="form-control p-2" @if ($field['is_required'] ?? false) required @endif>
+                                                @break
 
-                                                    @case('number')
-                                                        <input type="number" name="{{ $field['name'] }}"
-                                                            class="form-control p-3 @if (isset($field['formula_field']) || isset($field['formula_price_per_unit'])) calc-trigger @endif"
-                                                            data-mult="{{ $field['calculation_multiplier'] ?? ($field['formula_price_per_unit'] ?? 0) }}">
-                                                    @break
+                                                @case('text')
+                                                    @if($field['name'] == 'map')
+                                                        <div class="input-group">
+                                                            <input type="text" name="map" id="map_input" class="form-control p-3" readonly placeholder="اضغط لالتقاط العنوان عبر GPS...">
+                                                            <button type="button" onclick="getLocation()" class="btn btn-gold text-white">
+                                                                <i class="fas fa-map-marker-alt"></i>
+                                                            </button>
+                                                        </div>
+                                                    @else
+                                                        <input type="text" name="{{ $field['name'] }}" class="form-control p-3" @if($field['name'] == 'area') placeholder="أدخل المساحة بالمتر المربع" @endif>
+                                                    @endif
+                                                @break
 
-                                                    @case('file')
-                                                        <input type="file" name="{{ $field['name'] }}" class="form-control p-2">
-                                                    @break
+                                                @case('number')
+                                                    <input type="number" name="{{ $field['name'] }}" class="form-control p-3 {{ in_array($field['name'], ['area', 'quantity']) ? 'calc-trigger' : '' }}" placeholder="0.00">
+                                                @break
+                                                
+                                                @default
+                                                    <input type="text" name="{{ $field['name'] }}" class="form-control p-3">
+                                            @endswitch
+                                        </div>
+                                    @endforeach
 
-                                                    @default
-                                                        <input type="text" name="{{ $field['name'] }}" class="form-control p-3">
-                                                @endswitch
-                                            </div>
-                                        @endforeach
-
-                                        <div class="cta-submit-area mt-5 pt-4 border-top">
-                                            <div class="alert alert-light text-center border py-3 mb-4 rounded-3">
-                                                <i class="fas fa-lock text-success me-2"></i> يتم تأمين اتصالك وتشفير بياناتك
-                                                قبل
-                                                التحويل للدفع.
-                                            </div>
-                                            <button type="submit"
-                                                class="btn btn-gold w-100 py-3 fw-900 rounded-pill shadow-lg h4">
-                                                تقديم الطلب والانتقال للدفع <i class="fas fa-chevron-left ms-2"></i>
+                                    <div class="mt-4 pt-4 border-top">
+                                        <div class="alert alert-info border-0 text-center mb-4">
+                                            <button type="button" class="btn btn-link text-decoration-none fw-bold" data-bs-toggle="modal" data-bs-target="#termsModal">
+                                                <i class="fas fa-file-contract"></i> الإقرار بالصلاحية والشروط والأحكام
                                             </button>
                                         </div>
-                                    </form>
-                                @else
-                                    <div class="alert alert-info">لا يوجد حقول إضافية مطلوبة لهذه الخدمة، يمكنك الضغط على
-                                        "تقديم"
-                                        مباشرة.</div>
-                                @endif
+                                        <button type="submit" class="btn btn-gold w-100 py-3 fw-bold rounded-pill h4">
+                                            تقديم الطلب والانتقال للدفع <i class="fas fa-chevron-left ms-2"></i>
+                                        </button>
+                                    </div>
+                                </form>
                             @else
-                                <div class="alert alert-warning text-center p-4">يرجى تسجيل الدخول أولاً للتمكن من ملء
-                                    الاستمارة.
+                                <div class="alert alert-warning text-center p-4 h5 rounded-4">
+                                    يرجى <a href="{{ route('login') }}" class="fw-bold">تسجيل الدخول</a> لتتمكن من تقديم الطلب.
                                 </div>
                             @endauth
                         </div>
@@ -167,56 +148,40 @@
                 <div class="col-lg-4">
                     <aside class="sidebar-sticky">
                         @if (!$service->children->isNotEmpty())
-                            <div class="sidebar-widget pricing-widget mb-4 shadow-sm border-0">
-                                <h5 class="widget-title"><i class="fas fa-receipt me-2 text-gold"></i> ملخص الرسوم</h5>
+                            <div class="sidebar-widget pricing-widget mb-4 shadow-lg border-0">
+                                <div class="p-4 bg-light border-bottom text-center">
+                                    <h5 class="m-0 fw-bold"><i class="fas fa-calculator ms-2 text-gold"></i> تقدير المقابل</h5>
+                                </div>
 
-                                @php
-                                    $vatAmount = $service->has_vat ? $service->base_price * 0.14 : 0;
-                                    $initialTotal =
-                                        $service->base_price +
-                                        $vatAmount +
-                                        $service->martyr_stamp_fee +
-                                        $service->sms_fee;
-                                @endphp
+                                <div class="p-4 bg-white">
+                                    <ul class="price-breakdown list-unstyled p-0 m-0">
+                                        <li><span>سعر المتر الأساسي:</span> <strong id="price_per_meter">0.00</strong></li>
+                                        <li><span>مقابل استغلال المكان:</span> <strong id="display_subtotal">0.00</strong></li>
+                                        <li><span>تأمين ({{ $service->insurance_percentage }}%):</span> <strong id="display_insurance">0.00</strong></li>
+                                        @if ($service->has_vat)
+                                            <li><span>ضريبة (14%):</span> <strong id="display_vat">0.00</strong></li>
+                                        @endif
+                                        <li><span>طابع الشهداء + SMS:</span> <strong>{{ number_format($service->martyr_stamp_fee + $service->sms_fee, 2) }}</strong></li>
+                                    </ul>
 
-                                <ul class="price-breakdown list-unstyled">
-                                    <li><span>رسم الخدمة</span> <strong>{{ number_format($service->base_price, 2) }}
-                                            ج.م</strong></li>
-
-                                    @if ($service->has_vat)
-                                        <li class="vat-line"><span>ضريبة (14%)</span> <span>+
-                                                {{ number_format($vatAmount, 2) }} ج.م</span></li>
-                                    @endif
-
-                                    <li><span>دمغة شهداء</span> <span>{{ number_format($service->martyr_stamp_fee, 2) }}
-                                            ج.م</span></li>
-                                    <li><span>خدمة SMS</span> <span>{{ number_format($service->sms_fee, 2) }} ج.م</span>
-                                    </li>
-                                </ul>
-
-                                <div class="total-box text-center p-3 rounded bg-light mt-3 border border-gold">
-                                    <span class="small d-block text-muted">إجمالي تكاليف الطلب (تقديرياً)</span>
-                                    <span class="h2 fw-900 text-dark m-0"
-                                        id="grandTotalDisplay">{{ number_format($initialTotal, 2) }}</span>
-                                    <span class="fw-bold">جنيه</span>
-                                    <div id="priceCalculationHint" class="price-updated-notif"></div>
+                                    <div class="total-box text-center p-4 mt-4">
+                                        <small class="d-block opacity-75">إجمالي المبلغ المطلوب</small>
+                                        <div class="d-flex align-items-center justify-content-center gap-2 mt-1">
+                                            <span class="h1 fw-bold text-gold mb-0" id="grandTotalDisplay">15.00</span>
+                                            <span class="h4 text-gold mb-0">ج.م</span>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         @endif
 
-                        {{-- خدمات ذات صلة --}}
                         @if ($relatedServices->isNotEmpty())
-                            <div class="sidebar-widget bg-white p-4 rounded-3 shadow-sm">
-                                <h5 class="widget-title mb-3 border-bottom pb-2">خدمات ذات صلة</h5>
+                            <div class="bg-white p-4 rounded-4 shadow-sm">
+                                <h5 class="fw-bold border-bottom pb-2 mb-3">خدمات ذات صلة</h5>
                                 @foreach ($relatedServices as $related)
-                                    <a href="{{ route('services.show', $related) }}" class="related-service-item">
-                                        <div class="icon">
-                                            {{-- Display parent icon if available, otherwise a default --}}
-                                            <i class="{{ $related->icon ?? 'fas fa-arrow-left' }}"></i>
-                                        </div>
-                                        <div class="title">
-                                            {{ $related->title }}
-                                        </div>
+                                    <a href="{{ route('services.show', $related) }}" class="d-flex align-items-center text-dark text-decoration-none mb-3 border-bottom pb-2">
+                                        <i class="{{ $related->icon ?? 'fas fa-chevron-left' }} text-gold ms-2"></i>
+                                        <span class="small">{{ $related->title }}</span>
                                     </a>
                                 @endforeach
                             </div>
@@ -226,65 +191,88 @@
             </div>
         </div>
     </main>
+
+    {{-- مودال الشروط --}}
+    <div class="modal fade" id="termsModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content rounded-4 shadow-lg border-0 text-end">
+                <div class="modal-header border-0 bg-light rounded-top-4">
+                    <h5 class="modal-title fw-bold">الضوابط والشروط القانونية</h5>
+                </div>
+                <div class="modal-body p-4">
+                    <p>1. يلتزم مقدم الطلب بصحة كافة البيانات المذكورة.</p>
+                    <p>2. يتم حساب المقابل بناءً على الفئات المعتمدة بالمحافظة والمساحة الفعلية.</p>
+                    <p>3. المقابل المدفوعة لا تُسترد في حال البدء في المعاينة الميدانية.</p>
+                </div>
+                <div class="modal-footer border-0 pt-0">
+                    <button type="button" class="btn btn-gold rounded-pill px-4" data-bs-dismiss="modal">موافق</button>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
 
 @push('scripts')
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const form = document.getElementById('dynamicServiceForm');
-            if (!form) return;
-
-            function handleConditions() {
-                document.querySelectorAll('.form-group').forEach(group => {
-                    const dependency = group.dataset.dependsOn;
-                    if (dependency) {
-                        const triggerInput = form.querySelector(`[name="${dependency}"]`);
-                        if (triggerInput) {
-                            const dependsValRaw = group.dataset.dependsVal;
-                            // تحويل القيم لمصفوفة لتدعم تعدد الخيارات (مثل ردي وفقد في آن واحد)
-                            let allowedValues = dependsValRaw.startsWith('[') ? JSON.parse(dependsValRaw) :
-                                [dependsValRaw];
-
-                            if (allowedValues.includes(triggerInput.value)) {
-                                group.style.display = 'block';
-                                group.querySelectorAll('input, select, textarea').forEach(el => el
-                                    .disabled = false);
-                            } else {
-                                group.style.display = 'none';
-                                group.querySelectorAll('input, select, textarea').forEach(el => el
-                                    .disabled = true);
-                            }
-                        }
-                    }
+        // 1. وظيفة الـ GPS
+        async function getLocation() {
+            if (navigator.geolocation) {
+                const btn = event.currentTarget;
+                btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
+                navigator.geolocation.getCurrentPosition(async (pos) => {
+                    try {
+                        const res = await fetch(`https://nominatim.openstreetmap.org/reverse?lat=${pos.coords.latitude}&lon=${pos.coords.longitude}&format=json&accept-language=ar`);
+                        const data = await res.json();
+                        document.getElementById('map_input').value = data.display_name;
+                    } catch (e) { alert("تعذر جلب العنوان."); }
+                    btn.innerHTML = '<i class="fas fa-map-marker-alt"></i>';
                 });
             }
+        }
 
-            form.addEventListener('change', handleConditions);
-            handleConditions(); // التشغيل الأول فور فتح الصفحة
+        // 2. محرك الأسعار الموحد
+        const pricingConfig = {
+            categoryData: {!! json_encode($service->category_pricing ?? []) !!},
+            insuranceRate: {{ $service->insurance_percentage ?? 0 }},
+            fixedFees: {{ $service->martyr_stamp_fee + $service->sms_fee }},
+            hasVat: {{ $service->has_vat ? 1 : 0 }}
+        };
 
-            // --- منطق الحساب المباشر للرفع المساحي ---
-            const serviceBase = {{ $service->base_price }};
-            const staticFees = {{ $service->martyr_stamp_fee + $service->sms_fee }};
-            const hasVat = {{ $service->has_vat ? 1 : 0 }};
+        function runCalculation() {
+            // جلب القيم - تأكد من مطابقة أسماء الـ inputs
+            const areaInput = document.querySelector('[name="area"]') || document.querySelector('[name="number"]');
+            const area = parseFloat(areaInput?.value) || 0;
+            const categoryName = document.querySelector('[name="category"]')?.value;
 
-            function updatePrice() {
-                let addedCost = 0;
-                form.querySelectorAll('.calc-trigger').forEach(input => {
-                    addedCost += (parseFloat(input.value) || 0) * (parseFloat(input.dataset.mult) || 0);
-                });
-
-                const newBase = serviceBase + addedCost;
-                const newVat = hasVat ? (newBase * 0.14) : 0;
-                const newTotal = newBase + newVat + staticFees;
-
-                document.getElementById('totalDisplay').innerText = newTotal.toLocaleString('en-US', {
-                    minimumFractionDigits: 2
-                });
+            let pricePerMeter = 0;
+            const match = pricingConfig.categoryData.find(c => c.name === categoryName);
+            if (match) {
+                pricePerMeter = parseFloat(match.price_multiplier);
             }
 
-            form.addEventListener('input', (e) => {
-                if (e.target.classList.contains('calc-trigger')) updatePrice();
+            // الحسابات
+            const subtotal = area * pricePerMeter;
+            const insurance = subtotal * (pricingConfig.insuranceRate / 100);
+            const vat = pricingConfig.hasVat ? (subtotal * 0.14) : 0;
+            const total = subtotal + insurance + vat + pricingConfig.fixedFees;
+
+            // تحديث الواجهة
+            document.getElementById('price_per_meter').innerText = pricePerMeter.toLocaleString();
+            document.getElementById('display_subtotal').innerText = subtotal.toLocaleString();
+            document.getElementById('display_insurance').innerText = insurance.toLocaleString();
+            if (pricingConfig.hasVat) {
+                document.getElementById('display_vat').innerText = vat.toLocaleString();
+            }
+            document.getElementById('grandTotalDisplay').innerText = total.toLocaleString('en-US', {
+                minimumFractionDigits: 2
             });
-        });
+        }
+
+        // الاستماع للتغيرات في كل حقول الفورم التي تؤثر على السعر
+        const form = document.getElementById('dynamicServiceForm');
+        if (form) {
+            form.addEventListener('input', runCalculation);
+            form.addEventListener('change', runCalculation);
+        }
     </script>
 @endpush

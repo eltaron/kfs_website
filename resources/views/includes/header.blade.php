@@ -194,69 +194,121 @@
     </nav>
 </header>
 <!-- ======================= Header End ======================= -->
+<!-- ======================= Mobile Menu Start ======================= -->
 <div class="mobile-menu-overlay" id="mobileMenuOverlay"></div>
-<!-- The actual menu panel -->
-<div class="mobile-menu-panel" id="mobileMenuPanel">
+
+<div class="mobile-menu-panel" style="z-index: 9999999999;" id="mobileMenuPanel">
     <button class="close-btn" id="closeMobileMenu">&times;</button>
-    <div class="menu-content">
-        <ul>
-            <li class="language-switcher dropdown">
-                <a href="#"class="language-switcher-button dropdown-toggle" data-bs-toggle="dropdown">اللغه</a>
-                <ul class="dropdown-menu dropdown-menu-end text-center">
-                    <li><a class="dropdown-item" onclick="setLanguage('ar')">العربية</a></li>
-                    <li><a class="dropdown-item" onclick="setLanguage('en')">English</a></li>
-                    <li><a class="dropdown-item" onclick="setLanguage('fr')">Français</a></li>
-                    <li><a class="dropdown-item" onclick="setLanguage('de')">Deutsch</a></li>
-                    <li><a class="dropdown-item" onclick="setLanguage('es')">Español</a></li>
-                    <li><a class="dropdown-item" onclick="setLanguage('zh-CN')">中文 (Chinese)</a></li>
-                    <li><a class="dropdown-item" onclick="setLanguage('ja')">日本語 (Japanese)</a></li>
-                    <li><a class="dropdown-item" onclick="setLanguage('ko')">한국어 (Korean)</a></li>
+    
+    <div class="menu-content px-3">
+        {{-- عرض ترحيبي أو اسم الموقع --}}
+        <div class="text-center py-4">
+            <img src="{{ Storage::url($settings['site_logo_header']) }}" alt="Logo" style="height: 60px;">
+        </div>
+
+        <ul class="list-unstyled">
+            {{-- الرئيسية --}}
+            <li>
+                <a style="justify-content: right;" href="{{ route('home') }}" class="{{ request()->routeIs('home') ? 'active-mobile-link' : '' }}">
+                    <i class="fas fa-home ms-2"></i> الرئيسية
+                </a>
+            </li>
+
+            {{-- عن المحافظة (قائمة منسدلة) --}}
+            <li class="mobile-dropdown">
+                <a style="justify-content: right;" href="javascript:void(0)" class="dropdown-trigger d-flex justify-content-between align-items-center">
+                    <span><i class="fas fa-info-circle ms-2"></i> عن المحافظة</span>
+                    <i class="fas fa-chevron-down small"></i>
+                </a>
+                <ul class="mobile-submenu list-unstyled pe-4 mt-2 display-none" style="display: none; background: #f9f9f9; border-radius: 8px;">
+                    <li><a href="{{ route('about') }}">عن المحافظة</a></li>
+                    <li><a href="{{ route('about.governor') }}">كلمة المحافظ</a></li>
+                    <li><a href="{{ route('officials.show', ['role' => 'governor']) }}">المحافظ</a></li>
+                    <li><a href="{{ route('officials.show', ['role' => 'deputy-governor']) }}">نائب المحافظ</a></li>
+                    <li><a href="{{ route('officials.show', ['role' => 'secretary-general']) }}">السكرتير العام</a></li>
+                    <li><a href="{{ route('officials.show', ['role' => 'assistant-secretary-general']) }}">السكرتير المساعد</a></li>
+                    <li><a href="{{ route('governorate.map') }}">خريطة المحافظة</a></li>
                 </ul>
-                <div id="google_translate_element" style="display:none"></div>
             </li>
-            <li><a href="{{ route('home') }}"
-                    class="{{ request()->routeIs('home') ? 'active-mobile-link' : '' }}">الرئيسية</a></li>
-            <li><a href="{{ route('posts.index') }}"
-                    class="{{ request()->routeIs('posts.index') ? 'active-mobile-link' : '' }}">الأخبار</a></li>
-            <li><a href="{{ route('services.index') }}"
-                    class="{{ request()->routeIs('services.index') ? 'active-mobile-link' : '' }}">الخدمات</a></li>
-            <li><a href="{{ route('projects.index') }}"
-                    class="{{ request()->routeIs('projects.index') ? 'active-mobile-link' : '' }}">المشروعات</a></li>
-            <li><a href="{{ route('investments.index') }}"
-                    class="{{ request()->routeIs('investments.index') ? 'active-mobile-link' : '' }}">الاستثمار</a>
+
+            {{-- الأخبار --}}
+            <li>
+                <a style="justify-content: right;" href="{{ route('posts.index') }}" class="{{ request()->routeIs('posts.index') ? 'active-mobile-link' : '' }}">
+                    <i class="fas fa-newspaper ms-2"></i> الأخبار
+                </a>
             </li>
-            <li><a href="{{ route('landmarks.index') }}"
-                    class="{{ request()->routeIs('landmarks.index') ? 'active-mobile-link' : '' }}">السياحة</a></li>
-            <li class="nav-item"><a class="nav-link {{ request()->routeIs('landmarks.index') ? 'active' : '' }}"
-                    href="#">استدامة للتدريب والتطوير</a>
+
+            {{-- الخدمات --}}
+            <li>
+                <a style="justify-content: right;" href="{{ route('services.index') }}" class="{{ request()->routeIs('services.index') ? 'active-mobile-link' : '' }}">
+                    <i class="fas fa-concierge-bell ms-2"></i> الخدمات
+                </a>
             </li>
-            <li><a href="{{ route('contact.index') }}"
-                    class="{{ request()->routeIs('contact.index') ? 'active-mobile-link' : '' }}">تواصل معنا</a></li>
+
+            {{-- المشروعات --}}
+            <li>
+                <a style="justify-content: right;" href="{{ route('projects.index') }}" class="{{ request()->routeIs('projects.index') ? 'active-mobile-link' : '' }}">
+                    <i class="fas fa-project-diagram ms-2"></i> المشروعات
+                </a>
+            </li>
+
+            {{-- الاستثمار --}}
+            <li>
+                <a style="justify-content: right;" href="{{ route('investments.index') }}" class="{{ request()->routeIs('investments.index') ? 'active-mobile-link' : '' }}">
+                    <i class="fas fa-chart-line ms-2"></i> الاستثمار
+                </a>
+            </li>
+
+            {{-- السياحة --}}
+            <li>
+                <a style="justify-content: right;" href="{{ route('landmarks.index') }}" class="{{ request()->routeIs('landmarks.index') ? 'active-mobile-link' : '' }}">
+                    <i class="fas fa-monument ms-2"></i> السياحة
+                </a>
+            </li>
+
+            {{-- تواصل معنا (قائمة منسدلة) --}}
+            <li class="mobile-dropdown">
+                <a style="justify-content: right;" href="javascript:void(0)" class="dropdown-trigger d-flex justify-content-between align-items-center">
+                    <span><i class="fas fa-envelope-open-text ms-2"></i> تواصل معنا</span>
+                    <i class="fas fa-chevron-down small"></i>
+                </a>
+                <ul class="mobile-submenu list-unstyled pe-4 mt-2 display-none" style="display: none; background: #f9f9f9;">
+                    <li><a href="{{ route('contact.index') }}">تواصل معنا</a></li>
+                    <li><a href="{{ route('complaints.create') }}">تقديم شكوى</a></li>
+                    <li><a href="{{ route('emergency.create') }}">تقديم بلاغ طوارئ</a></li>
+                    <li><a href="{{ route('suggestions.create') }}">تقديم مقترح</a></li>
+                    <li><a href="{{ route('surveys.service.create') }}">تقييم أداء الخدمات</a></li>
+                </ul>
+            </li>
+
+            {{-- حساب المستخدم --}}
             @guest
-                {{-- Show these links if the user is a GUEST --}}
-                <li><a href="{{ route('login') }}">تسجيل الدخول</a></li>
-                <li><a href="{{ route('register.citizen') }}">تسجيل جديد</a></li>
+                <li><a style="justify-content: right;" href="{{ route('login') }}" class="btn btn-primary text-white mx-3 my-2 text-center">تسجيل الدخول</a></li>
+                <li><a style="justify-content: right;" href="{{ route('register.citizen') }}" class="btn btn-outline-primary mx-3 text-center">تسجيل جديد</a></li>
             @else
-                {{-- Show these links if the user is LOGGED IN --}}
-                {{-- <li class="user-info">
-                    <i class="fas fa-user-circle"></i>
-                    <span>مرحبا، {{ Str::words(Auth::user()->name, 1, '') }}</span>
-                </li> --}}
-                <li><a href="{{ route('citizen.dashboard') }}">لوحة التحكم</a></li>
+                <li><a style="justify-content: right;" href="{{ route('citizen.dashboard') }}"><i class="fas fa-columns ms-2"></i> لوحة تحكم المواطن</a></li>
+                
+                @if (auth()->user()->isEmployee())
+                    <li>
+                        <a style="justify-content: right;" href="{{ route('employee.erp.index') }}" class="fw-bold text-success">
+                            <i class="fas fa-briefcase ms-2"></i> بوابة الموظفين (ERP)
+                        </a>
+                    </li>
+                @endif
+
                 <li>
-                    <a href="{{ route('logout') }}"
-                        onclick="event.preventDefault(); document.getElementById('logout-form-mobile').submit();"
-                        class="text-danger">
-                        تسجيل الخروج
+                    <a style="justify-content: right;" href="{{ route('logout') }}" class="text-danger" 
+                       onclick="event.preventDefault(); document.getElementById('logout-form-mobile').submit();">
+                        <i class="fas fa-sign-out-alt ms-2"></i> تسجيل الخروج
                     </a>
-                    <form id="logout-form-mobile" action="{{ route('logout') }}" method="POST" class="d-none">
-                        @csrf
-                    </form>
                 </li>
             @endguest
         </ul>
+
+       
     </div>
 </div>
+<!-- ======================= Mobile Menu End ======================= -->
 {{-- مودال البحث الاحترافي --}}
 <div class="search-overlay" id="searchOverlay">
     <button class="close-search" id="closeSearch">&times;</button>
